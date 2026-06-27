@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>פסיכופיזיולוגיה — רקע ועולם המחקר | Section 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#FDFCF9; --bg-alt:#F5F3EE; --text:#1C1B18; --text-mid:#4A4840; --text-light:#8A8680;
+      --accent:#2A4B7C; --accent-subtle:#E8EEF7; --border:#E2DDD5; --border-strong:#C4BFB5;
+      --era-1:#8B6B3D; --era-2:#3A6B8A; --era-3:#3D6B54; --era-4:#6B4A8A;
+      --font-body:'Frank Ruhl Libre',Georgia,serif;
+      --font-ui:'Lato',system-ui,sans-serif;
+      --font-code:'Fira Code','Courier New',monospace;
+      --nav-h:58px; --sidebar-w:224px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:18px;line-height:1.8;-webkit-font-smoothing:antialiased;}
+    a{color:var(--accent);}
+    #rp{position:fixed;top:var(--nav-h);right:0;left:0;height:2px;background:var(--accent);transform-origin:right center;transform:scaleX(0);z-index:900;transition:transform .08s linear;}
+    .site-nav{position:fixed;top:0;right:0;left:0;height:var(--nav-h);background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;z-index:1000;}
+    .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;}
+    .site-title{font-family:var(--font-body);font-weight:700;font-size:0.88rem;color:var(--text);text-decoration:none;}
+    .site-title em{color:var(--accent);font-style:normal;}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links a{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-mid);text-decoration:none;padding:0 13px;height:var(--nav-h);display:flex;align-items:center;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;}
+    .nav-links a:hover,.nav-links a.here{color:var(--accent);border-bottom-color:var(--accent);}
+    .wrap{max-width:1120px;margin:0 auto;padding:calc(var(--nav-h) + 40px) 32px 100px;display:flex;gap:56px;align-items:flex-start;}
+    .sidebar{width:var(--sidebar-w);flex-shrink:0;}
+    .sidebar-inner{position:sticky;top:calc(var(--nav-h) + 36px);}
+    .sb-label{font-family:var(--font-ui);font-size:0.66rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light);margin-bottom:14px;}
+    .toc{list-style:none;border-right:2px solid var(--border);padding-right:16px;margin-bottom:36px;}
+    .toc li+li{margin-top:2px;}
+    .toc a{display:block;font-family:var(--font-ui);font-size:0.78rem;color:var(--text-mid);text-decoration:none;padding:5px 0;line-height:1.45;transition:color .15s;position:relative;}
+    .toc a::after{content:'';position:absolute;right:-18px;top:50%;transform:translateY(-50%);width:2px;height:0;background:var(--accent);transition:height .2s;}
+    .toc a.on{color:var(--accent);font-weight:700;}.toc a.on::after{height:70%;}
+    .toc-n{color:var(--text-light);margin-left:5px;font-size:0.7rem;}
+    .sec-prog{border-top:1px solid var(--border);padding-top:18px;}
+    .prog-lbl{font-family:var(--font-ui);font-size:0.68rem;color:var(--text-light);margin-bottom:9px;}
+    .dots{display:flex;gap:5px;}.dot{width:7px;height:7px;border-radius:50%;background:var(--border-strong);}.dot.on{background:var(--accent);}
+    .content{flex:1;min-width:0;}
+    .sec-head{margin-bottom:60px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+    .sec-tag{font-family:var(--font-ui);font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block;}
+    .sec-head h1{font-size:2.5rem;font-weight:900;line-height:1.18;color:var(--text);margin-bottom:18px;}
+    .sec-intro{font-size:1.05rem;color:var(--text-mid);line-height:1.85;max-width:580px;}
+    .cs{margin-bottom:72px;scroll-margin-top:calc(var(--nav-h) + 28px);}
+    .cs h2{font-size:1.55rem;font-weight:700;color:var(--text);margin-bottom:22px;padding-bottom:11px;border-bottom:1px solid var(--border);}
+    .cs h2 .n{color:var(--text-light);font-size:0.88rem;margin-left:10px;font-weight:400;}
+    .cs h3{font-size:1.08rem;font-weight:700;margin:30px 0 10px;}
+    p{margin-bottom:16px;}
+    .en{font-style:italic;unicode-bidi:bidi-override;direction:ltr;display:inline;}
+    .callout{background:var(--accent-subtle);border-right:4px solid var(--accent);padding:18px 22px;margin:26px 0;border-radius:0 3px 3px 0;}
+    .callout-lbl{font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+    .callout p{margin:0;font-size:0.94rem;}
+    .kc{background:var(--bg-alt);border:1px solid var(--border);border-radius:3px;padding:22px;margin:22px 0;}
+    .kc .lbl{font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:8px;}
+    .kc .term{font-size:1.1rem;font-weight:700;margin-bottom:7px;}
+    .kc p{margin:0;font-size:0.94rem;color:var(--text-mid);}
+    /* Inference taxonomy */
+    .inference-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+    .inf-card{background:var(--bg-alt);border:1px solid var(--border);border-radius:3px;padding:16px;}
+    .inf-type{font-family:var(--font-ui);font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:6px;}
+    .inf-title{font-size:0.95rem;font-weight:700;margin-bottom:6px;}
+    .inf-desc{font-size:0.84rem;color:var(--text-mid);margin:0;line-height:1.6;}
+    .inf-card.highlight{border-right:3px solid var(--accent);background:var(--accent-subtle);}
+    /* Advantages grid */
+    .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0;}
+    .adv-card{background:var(--bg-alt);border:1px solid var(--border);padding:18px;border-radius:3px;}
+    .adv-card .ico{font-size:1.3rem;margin-bottom:9px;}
+    .adv-card h4{font-size:0.95rem;font-weight:700;margin-bottom:7px;}
+    .adv-card p{font-size:0.84rem;color:var(--text-mid);margin:0;line-height:1.6;}
+    /* Schema bridge */
+    .schema-bridge{background:var(--accent-subtle);border:1px solid var(--border);border-right:4px solid var(--era-2);padding:26px 28px;margin:30px 0;border-radius:0 3px 3px 0;}
+    .schema-bridge .lbl{font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--era-2);margin-bottom:9px;}
+    .schema-bridge p{margin-bottom:0;font-size:0.96rem;}
+    /* Schema modes */
+    .modes-grid{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+    .mode-card{border:1px solid var(--border);border-radius:3px;padding:18px 20px;background:var(--bg-alt);}
+    .mode-card.vc{border-right:4px solid #C0504D;}
+    .mode-card.dp{border-right:4px solid #708090;}
+    .mode-card.ha{border-right:4px solid var(--era-3);}
+    .mode-hd{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;}
+    .mode-name{font-size:0.95rem;font-weight:700;}
+    .mode-en{font-family:var(--font-ui);font-size:0.78rem;color:var(--text-light);}
+    .mode-profile{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-mid);line-height:1.65;margin:0;}
+    /* Limitations */
+    .lim-list{list-style:none;}
+    .lim-list li{padding:15px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;}
+    .lim-n{font-family:var(--font-ui);font-size:0.82rem;font-weight:700;color:var(--text-light);min-width:22px;padding-top:1px;}
+    .lim-body h4{font-size:0.96rem;font-weight:700;margin-bottom:5px;}
+    .lim-body p{font-size:0.88rem;color:var(--text-mid);margin:0;line-height:1.65;}
+    /* Timeline */
+    .era-group{margin-bottom:44px;}
+    .era-hd{display:flex;align-items:center;gap:11px;margin-bottom:20px;}
+    .era-badge{font-family:var(--font-ui);font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:4px 11px;border-radius:2px;color:#fff;}
+    .e1{background:var(--era-1);}.e2{background:var(--era-2);}.e3{background:var(--era-3);}.e4{background:var(--era-4);}
+    .era-yr{font-family:var(--font-ui);font-size:0.78rem;color:var(--text-light);}
+    .tl-events{border-right:2px solid var(--border-strong);padding-right:22px;}
+    .tl-ev{position:relative;cursor:pointer;}
+    .tl-ev::before{content:'';position:absolute;right:-30px;top:20px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--border-strong);transition:background .2s,border-color .2s;}
+    .e1-group .tl-ev::before{border-color:var(--era-1);}
+    .e2-group .tl-ev::before{border-color:var(--era-2);}
+    .e3-group .tl-ev::before{border-color:var(--era-3);}
+    .e4-group .tl-ev::before{border-color:var(--era-4);}
+    .tl-ev.open::before{background:var(--accent)!important;border-color:var(--accent)!important;}
+    .ev-hd{display:flex;align-items:baseline;gap:11px;padding:13px 0 11px;border-bottom:1px solid transparent;transition:border-color .15s;user-select:none;}
+    .tl-ev:hover .ev-hd{border-bottom-color:var(--border);}
+    .ev-yr{font-family:var(--font-ui);font-size:0.79rem;font-weight:700;color:var(--text-light);min-width:38px;flex-shrink:0;}
+    .ev-title{font-size:0.98rem;font-weight:500;color:var(--text);flex:1;}
+    .ev-auth{font-family:var(--font-ui);font-size:0.73rem;font-style:italic;color:var(--text-light);flex-shrink:0;}
+    .ev-caret{font-family:var(--font-ui);font-size:0.75rem;color:var(--text-light);flex-shrink:0;transition:transform .2s;}
+    .tl-ev.open .ev-caret{transform:rotate(180deg);}
+    .ev-detail{display:none;padding:2px 0 16px;}
+    .tl-ev.open .ev-detail{display:block;}
+    .ev-brief{font-size:0.9rem;font-weight:500;color:var(--text-mid);margin-bottom:8px;}
+    .ev-full{font-size:0.88rem;line-height:1.75;color:var(--text-mid);margin:0;}
+    /* Next section */
+    .next-sec{display:flex;align-items:center;justify-content:space-between;padding:22px 30px;background:var(--bg-alt);border:1px solid var(--border);border-radius:3px;text-decoration:none;margin-top:72px;transition:border-color .2s,background .2s;}
+    .next-sec:hover{border-color:var(--accent);background:var(--accent-subtle);}
+    .next-lbl{font-family:var(--font-ui);font-size:0.69rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:3px;}
+    .next-title{font-size:1rem;font-weight:700;color:var(--accent);}
+    .next-arrow{font-size:1.3rem;color:var(--text-light);}
+    /* Source downloads */
+    .sources-block{background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;padding:24px 26px;margin:0 0 56px;}
+    .sources-hd{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+    .sources-hd .ico{font-size:1.05rem;}
+    .sources-hd h3{font-size:1rem;font-weight:700;color:var(--text);margin:0;}
+    .sources-sub{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-mid);line-height:1.6;margin:0 0 18px;}
+    .sources-list{display:flex;flex-direction:column;gap:10px;}
+    .source-row{display:flex;align-items:center;gap:14px;background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:13px 16px;transition:border-color .15s;}
+    .source-row:hover{border-color:var(--border-strong);}
+    .source-icon{font-size:1.5rem;flex-shrink:0;line-height:1;}
+    .source-meta{flex:1;min-width:0;}
+    .source-name{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .source-lang{font-family:var(--font-ui);font-size:0.62rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-light);border:1px solid var(--border-strong);border-radius:2px;padding:1px 6px;}
+    .source-desc{font-family:var(--font-ui);font-size:0.78rem;color:var(--text-light);line-height:1.5;}
+    .source-actions{display:flex;gap:8px;flex-shrink:0;}
+    .source-btn{font-family:var(--font-ui);font-size:0.76rem;font-weight:700;text-decoration:none;padding:7px 14px;border-radius:3px;transition:background .15s,border-color .15s,color .15s;white-space:nowrap;}
+    .source-btn.view{color:var(--accent);border:1px solid var(--border-strong);background:var(--bg);}
+    .source-btn.view:hover{border-color:var(--accent);background:var(--accent-subtle);}
+    .source-btn.dl{color:#fff;background:var(--accent);border:1px solid var(--accent);}
+    .source-btn.dl:hover{background:#1E3659;}
+    .sources-note{font-family:var(--font-ui);font-size:0.74rem;color:var(--text-light);line-height:1.55;margin:16px 0 0;padding-top:14px;border-top:1px solid var(--border);}
+    @media(max-width:880px){.wrap{flex-direction:column-reverse;gap:20px;padding:calc(var(--nav-h) + 20px) 18px 60px;}.sidebar{width:100%;}.sidebar-inner{position:static;}.toc{display:flex;flex-wrap:wrap;gap:4px 16px;border:none;padding:0;}.toc a::after{display:none;}.nav-links{display:none;}.sec-head h1{font-size:1.85rem;}.adv-grid,.inference-grid{grid-template-columns:1fr;}.source-row{flex-wrap:wrap;}.source-actions{width:100%;}.source-btn{flex:1;text-align:center;}}
+
+    /* ═══ V2 UPGRADES ═══════════════════════════════════════ */
+    .v2-banner{margin:0;max-width:520px;}
+    .v2-banner svg{width:100%;height:auto;display:block;overflow:visible;}
+    .vb-base{stroke:var(--border);stroke-width:1;}
+    .vb-eda,.vb-ecg{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);}
+    .vb-eda{stroke:var(--era-3);stroke-width:2.2;opacity:.85;}
+    .vb-ecg{stroke:var(--accent);stroke-width:2.2;}
+    @keyframes vb-draw{to{stroke-dashoffset:0;}}
+    html:not(.arlab-gate-locked) .vb-eda{animation:vb-draw 1.8s ease-out .3s forwards;}
+    html:not(.arlab-gate-locked) .vb-ecg{animation:vb-draw 2.2s ease-out .4s forwards;}
+    .vb-pulse{fill:var(--accent);}
+    @keyframes vb-pulse{0%,100%{opacity:.3;r:3;}50%{opacity:1;r:5;}}
+    html:not(.arlab-gate-locked) .vb-pulse{animation:vb-pulse 1.7s ease-in-out 2.3s infinite;}
+
+    .read-meta{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 26px;}
+    .read-meta .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.02em;color:var(--text-mid);background:var(--bg-alt);border:1px solid var(--border);border-radius:999px;padding:5px 12px;}
+
+    .tl-ev .ev-hd{transition:background .15s,padding-right .15s;border-radius:3px;}
+    .tl-ev:hover .ev-hd{background:var(--bg-alt);padding-right:8px;}
+    .tl-ev .ev-caret{transition:transform .25s ease;}
+
+    .inf-card,.adv-card,.mode-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+    .inf-card:hover,.adv-card:hover,.mode-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(28,27,24,.06);}
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto;}
+      .vb-eda,.vb-ecg{stroke-dashoffset:0 !important;animation:none !important;}
+      .vb-pulse{animation:none !important;}
+      .inf-card:hover,.adv-card:hover,.mode-card:hover,.tl-ev:hover .ev-hd{transform:none !important;}
+    }
+
+    /* === V4: figures + lightbox + milestones table === */
+    .fig { margin: 28px 0; }
+    .fig .shot { display:block; width:100%; padding:0; border:1px solid var(--border); border-radius:6px; overflow:hidden; background:var(--bg-alt); cursor:zoom-in; position:relative; box-shadow:0 1px 3px rgba(28,27,24,.05); transition:border-color .18s, box-shadow .18s, transform .18s; }
+    .fig .shot:hover { border-color:var(--accent); box-shadow:0 8px 24px rgba(42,75,124,.12); transform:translateY(-2px); }
+    .fig .shot:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    .fig .shot img { display:block; width:100%; height:auto; }
+    .fig .shot-zoom { position:absolute; bottom:10px; left:10px; display:inline-flex; align-items:center; gap:5px; font-family:var(--font-ui); font-size:0.72rem; font-weight:700; color:#fff; background:rgba(28,27,24,.78); border-radius:999px; padding:4px 11px; pointer-events:none; }
+    .fig figcaption { font-family:var(--font-ui); font-size:0.8rem; color:var(--text-light); line-height:1.6; margin-top:11px; padding-right:12px; border-right:3px solid var(--border-strong); }
+
+    .lightbox { position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; padding:clamp(1rem,3vw,2.5rem); background:rgba(28,27,24,.92); }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:96vw; max-height:92vh; width:auto; height:auto; object-fit:contain; border-radius:6px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+    .lb-close { position:fixed; top:18px; left:20px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font-size:1.7rem; line-height:1; cursor:pointer; display:grid; place-items:center; transition:background .18s; }
+    .lb-close:hover { background:rgba(255,255,255,.24); }
+
+    .milestones { margin: 6px 0 0; }
+    .milestones-scroll { overflow-x:auto; border:1px solid var(--border); border-radius:6px; -webkit-overflow-scrolling:touch; }
+    .mtable { border-collapse:collapse; width:100%; min-width:1060px; font-family:var(--font-ui); font-size:0.82rem; text-align:left; }
+    .mtable thead th { position:sticky; top:0; background:var(--accent); color:#fff; font-weight:700; font-size:0.73rem; letter-spacing:.01em; text-align:left; padding:11px 12px; line-height:1.4; }
+    .mtable tbody td { padding:11px 12px; border-top:1px solid var(--border); color:var(--text-mid); line-height:1.6; vertical-align:top; }
+    .mtable tbody tr:nth-child(even) { background:var(--bg-alt); }
+    .mtable tbody tr:hover { background:var(--accent-subtle); }
+    .mtable .yr { font-weight:700; color:var(--accent); white-space:nowrap; }
+    .mtable .who { font-weight:700; color:var(--text); }
+    .mtable .src { text-align:center; white-space:nowrap; color:var(--text-light); font-weight:700; }
+    .m-legend { font-family:var(--font-ui); font-size:0.76rem; color:var(--text-light); margin-top:11px; line-height:1.6; }
+    .m-legend b { color:var(--text-mid); }
+    @media (max-width:880px){ .fig .shot-zoom{ bottom:8px; left:8px; } }
+  </style>
+  <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
+  <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../" class="site-title">מדריך <em>פסיכופיזיולוגיה</em></a>
+    <ul class="nav-links">
+      <li><a href="../intro/" class="here">מבוא</a></li>
+      <li><a href="../measures/">מדדים</a></li>
+      <li><a href="../eda/">EDA</a></li>
+      <li><a href="../ecg-rsa/">ECG &amp; RSA</a></li>
+      <li><a href="../case-study/">ניתוח מקרה</a></li>
+      <li><a href="../resources/">משאבים</a></li>
+    </ul>
+  </div>
+</nav>
+<div id="rp"></div>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-label">בסקשן זה</div>
+      <ul class="toc" id="toc">
+        <li><a href="#what-is"><span class="toc-n">1.1</span>מה זה פסיכופיזיולוגיה?</a></li>
+        <li><a href="#timeline"><span class="toc-n">1.2</span>ציר זמן היסטורי</a></li>
+        <li><a href="#why-measure"><span class="toc-n">1.3</span>למה למדוד את הגוף?</a></li>
+        <li><a href="#schema"><span class="toc-n">1.4</span>רגש, ויסות וסכמה תרפיה</a></li>
+        <li><a href="#challenges"><span class="toc-n">1.5</span>אתגרים ומגבלות</a></li>
+      </ul>
+      <div class="sec-prog">
+        <div class="prog-lbl">Section 1 מתוך 6</div>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="sec-head">
+      <span class="sec-tag">Section 1 · מבוא</span>
+      <h1>פסיכופיזיולוגיה<br>רקע, היסטוריה ועולם המחקר</h1>
+      <p class="sec-intro">הגוף לא שותק כשהנפש עובדת. פסיכופיזיולוגיה היא התחום שמקשיב לו — מאיפה הוא בא, למה הוא קיים, ואיך הוא רלוונטי לחקר רגש, ויחסים וסכמה תרפיה.</p>
+      <div class="read-meta">
+        <span class="chip" id="read-time">⏱ זמן קריאה</span>
+        <span class="chip">📑 5 חלקים</span>
+        <span class="chip">🕰 ציר זמן אינטראקטיבי</span>
+      </div>
+      <div class="v2-banner" role="img" aria-label="איור חי של אות פעילות אלקטרודרמלית (EDA) ואות לב (ECG)">
+        <svg viewBox="0 0 520 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line class="vb-base" x1="0" y1="50" x2="520" y2="50"/>
+          <path class="vb-eda" style="--len:600" d="M0,22 C50,18 80,10 130,16 C190,23 220,34 280,26 C340,18 380,8 440,18 C490,26 510,22 520,20"/>
+          <path class="vb-ecg" style="--len:720" d="M0,50 L120,50 L128,50 L134,45 L140,50 L150,50 L158,55 L164,22 L170,64 L176,45 L186,50 L300,50 L308,50 L314,45 L320,50 L330,50 L338,55 L344,22 L350,64 L356,45 L366,50 L520,50"/>
+          <circle class="vb-pulse" cx="164" cy="22" r="3"/>
+        </svg>
+      </div>
+    </header>
+
+    <figure class="fig">
+      <button class="shot" type="button" aria-label="הגדלת התמונה למסך מלא">
+        <img src="images/fig-overview.webp" alt="תרשים סקירה: האבולוציה והעוצמה הקלינית של הפסיכופיזיולוגיה." width="1800" height="1005" loading="eager" decoding="async">
+        <span class="shot-zoom" aria-hidden="true">⤢ הגדלה</span>
+      </button>
+      <figcaption>סקירה כללית — האבולוציה והעוצמה הקלינית של הפסיכופיזיולוגיה: מאבני היסוד (1847) דרך ההתמסדות ועד העידן המודרני, היתרונות הקליניים של מדידת הגוף, והגשר לסכמה תרפיה. (יצירה: NotebookLM)</figcaption>
+    </figure>
+
+    <!-- 1.1 -->
+    <section class="cs" id="what-is">
+      <h2><span class="n">1.1</span>מה זה פסיכופיזיולוגיה?</h2>
+
+      <p>פסיכופיזיולוגיה (<span class="en">Psychophysiology</span>) היא תחום מחקר הבוחן את הקשרים הדינמיים בין תהליכים פסיכולוגיים — מחשבות, רגשות, תשומת לב, מוטיבציה — לבין תגובות פיזיולוגיות הניתנות למדידה. ה-Society for Psychophysiological Research מגדיר אותה כחקר הקשרים ההדדיים בין תופעות פסיכולוגיות לתגובות פיזיולוגיות הנרשמות מגוף האדם. בניגוד לנוירולוגיה קלינית העוסקת בפתולוגיה, ובניגוד לנוירומדע הממוקד במבנה המוח — הפסיכופיזיולוגיה שואלת שאלה בסיסית אחרת: <strong>כיצד הנפש והגוף מדברים זה עם זה ברגעי חוויה פסיכולוגית?</strong></p>
+
+      <p>קייקופו ועמיתים (Cacioppo et al., 2007) מנסחים זאת כ"הנחת ההגשמה" (<span class="en">embodiment premise</span>): תפיסה, מחשבה, רגש והתנהגות הם תופעות גופניות, ולכן מדידת תהליכים פיזיים יכולה להאיר את המוח. אבל אותם חוקרים מדגישים גם את הגבול: <strong>הפיזיולוגיה לא לובשת את משמעותה הפסיכולוגית על פניה</strong>. קשר בין מדד פיזיולוגי למצב פסיכולוגי תמיד תלוי בעיצוב ניסויי, באיכות מדידה, בניתוח, ובתיאוריה.</p>
+
+      <div class="kc">
+        <div class="lbl">הגדרה</div>
+        <div class="term">פסיכופיזיולוגיה</div>
+        <p>מחקר הקשרים הדינמיים בין תהליכים פסיכולוגיים לתגובות פיזיולוגיות הניתנות למדידה — באמצעות <strong>מדדים פריפריאליים</strong> (מחוץ למוח) — כדי ללמוד על תהליכים פסיכולוגיים שאינם נגישים לדיווח עצמי בלבד.</p>
+      </div>
+
+      <h3>לוגיקת ההיסק הפסיכופיזיולוגי</h3>
+      <p>קייקופו, טסינרי ובנטסון (2007) מיפו את היחסים האפשריים בין מצב פסיכולוגי לתגובה פיזיולוגית לארבעה סוגים. ההבנה שלהם קריטית לכל חוקר שעובד עם EDA, RSA או כל מדד אחר:</p>
+
+      <div class="inference-grid">
+        <div class="inf-card">
+          <div class="inf-type">סוג א׳ — נדיר</div>
+          <div class="inf-title">חד-חד-ערכי (Isomorphic)</div>
+          <p class="inf-desc">מצב פסיכולוגי אחד → תגובה פיזיולוגית אחת ויחידה. מאפשר היסק דו-כיווני ישיר. בפסיכופיזיולוגיה אנושית — כמעט לא קיים.</p>
+        </div>
+        <div class="inf-card">
+          <div class="inf-type">סוג ב׳</div>
+          <div class="inf-title">אחד-לרבים (One-to-Many)</div>
+          <p class="inf-desc">מצב פסיכולוגי אחד → מפל של תגובות מרובות. למשל: איום מפעיל גם EDA, גם דופק, גם מתח שרירי.</p>
+        </div>
+        <div class="inf-card highlight">
+          <div class="inf-type">סוג ג׳ — הנפוץ ביותר ⚠️</div>
+          <div class="inf-title">רבים-לאחד (Many-to-One)</div>
+          <p class="inf-desc">מצבים פסיכולוגיים שונים → אותה תגובה פיזיולוגית. EDA עולה עם חרדה, כעס, עוררות מינית, עומס קוגניטיבי ותנועה. <strong>לא ניתן להסיק מצב ספציפי מהמדד לבדו.</strong></p>
+        </div>
+        <div class="inf-card">
+          <div class="inf-type">סוג ד׳</div>
+          <div class="inf-title">רבים-לרבים (Many-to-Many)</div>
+          <p class="inf-desc">תהליכים מרובים מעצבים פרופילים משתנים לאורך זמן. הנפוץ ביחסים קליניים מורכבים.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-lbl">המסקנה המעשית</div>
+        <p>רוב מדדי הפסיכופיזיולוגיה הקלינית נופלים בסוג ג׳. לכן: עיצוב ניסויי קפדני, שילוב מדדים, ומסגרת תיאורטית מובהקת — אינם אופציונליים. הם הם שהופכים נתון פיזיולוגי לעדות פסיכולוגית.</p>
+      </div>
+
+      <h3>"רעיון עתיק, מדע חדש"</h3>
+      <p>האינטואיציה שמצב הגוף קשור למצב הנפש מלווה את האדם מאז ומתמיד — אבל ההפיכה שלה ל<strong>מדע שיטתי</strong> היא בת כמה עשורים בלבד. חשוב להבחין בין שני אירועים נפרדים: מתי <em>התופעות</em> התגלו (תגובת העור, שונות הדופק — במאה ה-19), ומתי <em>השדה התמסד</em> כדיסציפלינה עם סטנדרטים, נומנקלטורה וקהילה (אמצע המאה ה-20).</p>
+
+      <p>הסיפור ממחיש את הפער: בשנות ה-50, החוקר אלברט אקס (<span class="en">Albert Ax</span>) החל להפיץ את ה-<span class="en">Psychophysiology Newsletter</span> (1955) — כי מי שעסק במדידה פיזיולוגית של תהליכים נפשיים נאלץ לחפש מאמרים בפזורה של עשרות כתבי עת שונים. מתוך "קבוצת הפסיכופיזיולוגיה" שנפגשה בכנסי ה-APA, הוקמה ב-1960 ה-<strong>Society for Psychophysiological Research (SPR)</strong>, וכתב העת <span class="en">Psychophysiology</span> יצא לראשונה ב-1964. הפתיח של הגיליון הראשון (Ax, 1964) מתאר שלפני כן חוקרים נאלצו לסרוק יותר מ-80 כתבי עת כדי למצוא מחקר רלוונטי — בדיוק הבעיה שהאגודה באה לפתור.</p>
+    </section>
+
+    <!-- 1.2 TIMELINE -->
+    <section class="cs" id="timeline">
+      <h2><span class="n">1.2</span>ציר זמן היסטורי</h2>
+      <p>פסיכופיזיולוגיה כתחום עצמאי היא צעירה יחסית — אבל שורשיה מגיעים לאמצע המאה ה-19, עוד לפני שה"פסיכולוגיה" עצמה הפכה למדע. למעשה יש <strong>שתי "לידות" מקבילות</strong>: המסלול הקרדיווסקולרי (לב — לודוויג 1847) והמסלול האלקטרודרמלי (עור — du Bois-Reymond 1849). שניהם מתכנסים בהתמסדות התחום (1960–64) ומגיעים עד עוגני הסטנדרטיזציה של ימינו. לחצו על כל אירוע לפרטים.</p>
+      <div id="tl-root"></div>
+    </section>
+
+    <figure class="fig">
+      <button class="shot" type="button" aria-label="הגדלת התמונה למסך מלא">
+        <img src="images/fig-evolution.webp" alt="תרשים: האבולוציה של הפסיכופיזיולוגיה 1849–2025." width="1800" height="1005" loading="lazy" decoding="async">
+        <span class="shot-zoom" aria-hidden="true">⤢ הגדלה</span>
+      </button>
+      <figcaption>האבולוציה של הפסיכופיזיולוגיה (1849–2025) — ממהפכת ההגשמה (ג&#x27;יימס, קנון), דרך עידן הדפוסים וההתמסדות, ועד החזית הדיגיטלית וה-AI. (יצירה: NotebookLM)</figcaption>
+    </figure>
+
+    <!-- 1.3 -->
+    <section class="cs" id="why-measure">
+      <h2><span class="n">1.3</span>למה למדוד את הגוף?</h2>
+
+      <p>אם חוקרים פסיכולוגיה — למה לא להסתפק בשאלונים, ריאיונות או תצפית על התנהגות? התשובה נשענת על ארבעה יתרונות ייחודיים שמדדים פיזיולוגיים מציעים — ושאף שיטה אחרת אינה יכולה לספק:</p>
+
+      <div class="adv-grid">
+        <div class="adv-card">
+          <div class="ico">⏱</div>
+          <h4>רזולוציה זמנית גבוהה</h4>
+          <p>פיזיולוגיה מגיבה מילישנייה אחר מילישנייה, ברצף. שאלון מצלם רגע; EDA ו-RSA מתעדים את <em>כל הקשת</em> — עלייה, שיא, ומהירות התאוששות. ויסות רגשי <em>הוא</em> הפרופיל הזמני הזה, לא רק נקודה בציר.</p>
+        </div>
+        <div class="adv-card">
+          <div class="ico">🚫</div>
+          <h4>עמידות בפני רצייה חברתית</h4>
+          <p>הגוף לא "עורך" את תגובותיו כמו שאלון. תגובות אוטונומיות מתרחשות גם כשהנבדק מנסה להסתיר, ולא ניתן לייצר פרופיל EDA+RSA מורכב בכוונה. (הסתייגות חשובה: שליטה עקיפה דרך נשימה ותנועה אפשרית.)</p>
+        </div>
+        <div class="adv-card">
+          <div class="ico">🔄</div>
+          <h4>גישה לתהליכים לא-מודעים</h4>
+          <p>חלק גדול מהעיבוד הרגשי מתרחש מתחת לסף המודעות — ה-ANS "יודע" לפני שהמילים מגיעות. קריטי במיוחד עם אלקסיתימיה, דיסוציאציה, ורמות הגנה גבוהות, שם הגוף מגלה מה הדיווח מסתיר.</p>
+        </div>
+        <div class="adv-card">
+          <div class="ico">🔗</div>
+          <h4>עוגן לתיאוריות גופניות</h4>
+          <p>Polyvagal Theory, Somatic Markers, Embodied Cognition, Neurovisceral Integration — כולן תיאוריות מרכזיות בחקר רגש שדורשות מדד גופני לבחינה אמפירית. ללא פיזיולוגיה אי אפשר לבדוק אותן.</p>
+        </div>
+      </div>
+
+      <h3>בעיית ההיסק — הגבול שלא לחצות</h3>
+      <p>היתרונות לעיל מגיעים עם אחריות אפיסטמולוגית: מדד פיזיולוגי <strong>אינו</strong> מצב פסיכולוגי. "EDA עלה" לא אומר "הנבדק חרד". EDA מושפעת מעוררות סימפתטית, שיכולה לנבוע מחרדה, מאמץ, חידוש, כעס, ריגוש, ותנועה. כדי להגיע ל<strong>היסק לגיטימי</strong> — פסיכופיזיולוג מבצע שלושה דברים:</p>
+
+      <ul style="list-style:none;padding:0;margin:16px 0 24px;display:flex;flex-direction:column;gap:8px;">
+        <li style="display:flex;gap:12px;font-size:0.94rem;"><span style="font-family:var(--font-ui);font-weight:700;color:var(--accent);min-width:28px;">א.</span><span><strong>עיצוב ניסויי מגביל:</strong> הסביבה, הגירוי, ומשימת הנבדק מגדירים אילו מצבים פסיכולוגיים אפשריים — ומצמצמים את ההסברים המתחרים.</span></li>
+        <li style="display:flex;gap:12px;font-size:0.94rem;"><span style="font-family:var(--font-ui);font-weight:700;color:var(--accent);min-width:28px;">ב.</span><span><strong>ראיות מתכנסות:</strong> שילוב מדדים שונים. אם EDA עולה <em>וגם</em> RSA יורדת — הפרופיל המשולב הרבה יותר פרשני מאשר כל מדד לבדו.</span></li>
+        <li style="display:flex;gap:12px;font-size:0.94rem;"><span style="font-family:var(--font-ui);font-weight:700;color:var(--accent);min-width:28px;">ג.</span><span><strong>מסגרת תיאורטית:</strong> הפרשנות נשענת על תיאוריה ולא על המדד הגולמי. "RSA ירדה" → "הפרה-סימפתטי נסוג" → "ויסות נפגע בהקשר זה" — כל שלב דורש הנחה תיאורטית.</span></li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-lbl">מה הגוף יודע שהמלים לא</div>
+        <p>שאלו את עצמכם: מה ייחודי ב-EDA או RSA מול "עד כמה נרגשת בסולם 1–7"? — לא רק דיוק, אלא <em>סוג שונה</em> של ידע: הגוף <strong>בפעולה</strong>, לא הגוף <strong>בזיכרון</strong>.</p>
+      </div>
+
+      <h3>שלושת ערוצי התגובה — והדיסוציאציה ביניהם</h3>
+      <p>נקודה מושגית שמחזקת את כל הרציונל: <strong>רגש אינו דבר אחד שנמדד בכמה דרכים</strong>, אלא מערכת של מרכיבים שלא תמיד נעים יחד. הטקסונומיה הקלאסית מבחינה בין שלושה ערוצי תגובה — <strong>מילולי/חווייתי</strong> (מה שהנבדק מדווח), <strong>התנהגותי</strong> (הבעות, פעולה, ביצוע), ו<strong>פיזיולוגי</strong> (EDA, RSA, דופק). בין-אישית הם עשויים להיות מתואמים חלקית בלבד — תופעה שנקראת <span class="en">response system concordance / discordance</span>.</p>
+
+      <p>מחקרים שמשלבים ערוצים מוצאים לא פעם שהם מתפצלים. למשל, מחקר על עיבוד נרטיבים רגשיים מצא שההבדל בין שפת אם לשפה זרה התבטא ב-EDA אבל <em>לא</em> בדיווח העצמי (Korpal et al., 2023). מסדי נתונים גדולים נבנו בדיוק כדי ללמוד את הקשר הזה — כמו מסד POPANE עם 1,157 מקרים ושמונה ביו-סיגנלים (Behnke et al., 2022).</p>
+
+      <div class="callout">
+        <div class="callout-lbl">העיקרון</div>
+        <p>המסקנה אינה "הגוף אומר אמת והמילים משקרות" — אלא ש<strong>כל ערוץ לוכד פיסה אחרת</strong>, והדיסוציאציה עצמה היא מידע. זה הצידוק העמוק למדידה פיזיולוגית: לא כדי "לתפוס שקרנים", אלא כדי לראות תהליך שהדיווח לבדו מחמיץ.</p>
+      </div>
+    </section>
+
+    <figure class="fig">
+      <button class="shot" type="button" aria-label="הגדלת התמונה למסך מלא">
+        <img src="images/fig-mindbody.webp" alt="תרשים: פסיכופיזיולוגיה כגשר בין הנפש לגוף." width="1800" height="1005" loading="lazy" decoding="async">
+        <span class="shot-zoom" aria-hidden="true">⤢ הגדלה</span>
+      </button>
+      <figcaption>פסיכופיזיולוגיה כגשר בין הנפש לגוף — מדוע למדוד את הגוף (מעבר למגבלות הדיווח), מערכת שלושת ערוצי התגובה והדיסוציאציה ביניהם, וזהירות אפיסטמית בפרשנות המדדים. (יצירה: NotebookLM)</figcaption>
+    </figure>
+
+    <!-- 1.4 -->
+    <section class="cs" id="schema">
+      <h2><span class="n">1.4</span>רגש, ויסות וסכמה תרפיה</h2>
+
+      <p>כל תיאוריה מרכזית של רגש ממקמת את הגוף כמרכיב מהותי: ג'יימס-לאנגה טענו שהגוף קודם לרגש; מודלים של הערכה קוגניטיבית מתארים רגשות כמגמות תגובה מתואמות הכוללות פיזיולוגיה; מודל התהליך של גרוס (1998) מציג רגשות כנפרשים לאורך זמן על פני מערכות מרובות. בכולן — הפיזיולוגיה אינה "שולית". היא פריפרית אנטומית אבל מרכזית תיאורטית.</p>
+
+      <h3>מודל האינטגרציה הנוירו-ויסצרלית</h3>
+      <p>תאי וליין (Thayer & Lane, 2000) הציעו שרשת מוחית אחת — ה-<span class="en">Central Autonomic Network</span> — מאחדת עיבוד רגשי, קוגניטיבי ואוטונומי. קליפת המוח הקדם-מצחית (<span class="en">PFC</span>) מפעילה שליטה מעכבת על האמיגדלה, המועברת ללב דרך הוואגוס — ומתבטאת כ-RSA גבוהה במנוחה. <strong>RSA גבוהה</strong> = מערכת גמישה שיכולה לגייס ולרסן יעיל. <strong>RSA נמוכה</strong> = מדד טרנס-דיאגנוסטי לפגיעות פסיכולוגית.</p>
+
+      <p>בושיין (Beauchaine, 2001) הצביע על RSA כביומרקר ספציפי לוויסות רגשי ולפסיכופתולוגיה. ואכן, בחולים עם הפרעות חרדה, דיכאון, BPD ו-PTSD — RSA נמוכה מופיעה באופן עקבי. הקשר ל<strong>סכמה תרפיה</strong> אינו אקראי.</p>
+
+      <div class="callout">
+        <div class="callout-lbl">שתי מסגרות, רמות ביסוס שונות</div>
+        <p>חשוב לחוקר חדש להבחין: <strong>Polyvagal Theory</strong> (Porges) היא שפה קלינית רבת-השפעה — אבל הבסיס המדעי שלה שנוי במחלוקת חריפה (ראו תימליין 2026). לעומתה, <strong>המודל הנוירו-ויסצרלי</strong> (Thayer & Lane) נשען על תמיכה נוירו-הדמייתית רחבה (מטא-אנליזה: Thayer et al., 2012) ומחובר ישירות למיקוד המעבדה ברגש וויסות. אפשר להחזיק את שתיהן — אבל לדעת איזו מבוססת יותר.</p>
+      </div>
+
+      <div class="schema-bridge">
+        <div class="lbl">הגשר התיאורטי</div>
+        <p>סכמה תרפיה (Young et al., 2003; ניסוח מחודש: Arntz et al., 2021) מניחה שסכמות אדפטיביות מוקדמות (<span class="en">Early Maladaptive Schemas</span>) הן דפוסים <strong>מגולמים</strong> — ההגדרה כוללת במפורש לא רק זיכרונות ורגשות אלא גם תחושות גופניות. כשסכמה מופעלת, הגוף מגיב לפני שהמודעות מגיעה: EDA עולה, RSA יורדת. פסיכופיזיולוגיה מאפשרת לכמת את ההפעלה הזו ולעקוב אחריה בזמן אמת.</p>
+      </div>
+
+      <h3>פרופילים פיזיולוגיים לפי מצב-מוד</h3>
+      <p>שלושת מצבי-המוד המרכזיים בסכמה תרפיה צפויים להציג פרופילים פיזיולוגיים שונים — המאפשרים לחקור את המציאות הביולוגית שלהם:</p>
+
+      <div class="modes-grid">
+        <div class="mode-card vc">
+          <div class="mode-hd">
+            <span class="mode-name">ילד פגיע</span>
+            <span class="mode-en">Vulnerable Child Mode</span>
+          </div>
+          <p class="mode-profile"><strong>פרופיל צפוי:</strong> עלייה מהירה ובולטת ב-EDA (SCL ↑ + SCR גבוהים) + ירידה חדה ב-RSA. הגוף מגייס משאבים סימפתטיים ומסיר את ה"בלם הוגאלי" — מצב של הפעלה עמוקה ולא-מווסתת שמתאים לחוויית מצוקה בלתי-נשלטת.</p>
+        </div>
+        <div class="mode-card dp">
+          <div class="mode-hd">
+            <span class="mode-name">מגן מנותק</span>
+            <span class="mode-en">Detached Protector Mode</span>
+          </div>
+          <p class="mode-profile"><strong>פרופיל מאתגר:</strong> הדיווח הסובייקטיבי — "שלווה". אבל הגוף יכול לחשוף <em>ניתוק סומטי</em>: EDA "שטוחה" בצד RSA נמוכה. המצב הזה <strong>יקר מטבולית</strong> — הגוף מנצל משאבים לדיכוי עיבוד רגשי, גם כשזה לא נראה מבחוץ. זה בדיוק המקרה שבו הפסיכופיזיולוגיה חושפת מה הדיווח מסתיר.</p>
+        </div>
+        <div class="mode-card ha">
+          <div class="mode-hd">
+            <span class="mode-name">מבוגר בריא</span>
+            <span class="mode-en">Healthy Adult Mode</span>
+          </div>
+          <p class="mode-profile"><strong>פרופיל צפוי:</strong> תגובתיות EDA מדודה ומותאמת להקשר + RSA גבוהה במנוחה עם <em>התאוששות מהירה</em> לאחר מתח. לא היעדר תגובה — אלא תגובה <strong>יעילה</strong>: גמישות אוטונומית. צמיחה ב-Healthy Adult mode לאורך הטיפול צריכה להתבטא כעלייה ב-RSA baseline ובגמישות אוטונומית.</p>
+        </div>
+      </div>
+
+      <h3>הגשר האמפירי — צעיר אבל בתנועה</h3>
+      <p>חשוב לכתוב את זה בכנות: הגשר בין סכמה תרפיה ל-EDA/RSA הוא <strong>מבוסס תיאורטית אבל צעיר אמפירית</strong> — וזה דווקא מחזק את הרציונל של המעבדה (יש כאן שדה פתוח). הבסיס התיאורטי איתן: מטא-אנליזה של פילקינגטון ועמיתים (Pilkington et al., 2023) מצאה שכל 18 הסכמות מתואמות עם קשיי ויסות רגשי, ורובן גם עם אלקסיתימיה. כלומר — אם הסכמות קשורות גם לקושי <em>לווסת</em> רגש וגם לקושי <em>לדווח</em> עליו, אז דיווח עצמי לבדו בעייתי במיוחד באוכלוסייה הזו, והערוץ הפיזיולוגי הופך חיוני.</p>
+
+      <div class="callout">
+        <div class="callout-lbl">המחקר האמפירי הראשוני — מה כבר נמצא</div>
+        <p><strong>Thomas et al. (2025):</strong> בדקו ישירות את הקשר בין הפעלת סכמת נטישה לעוררות פיזיולוגית — ומצאו שמדד <em>מרומז</em> (implicit) של הסכמה ניבא עוררות, דווקא בהקשר עמום ולא בדחייה גלויה. דוגמה יפה לפיזיולוגיה שלוכדת מה שדיווח מפורש מחמיץ.<br><br>
+        <strong>Bolinski et al. (2021):</strong> הפעלה רגשית ורסטרוקטורציה ב-VR ייצרו יותר SC ו-HR מגישה דמיונית — אף שהדיווח העצמי לא נבדל.<br><br>
+        <strong>Krans et al. (2026):</strong> סקירה מתודולוגית שמצאה רק <em>חמישה</em> מחקרים שהשרו ניסויית מצבי סכמה — עם פערים בין דירוג המטפל לדירוג המטופל. בדיוק הפער שמדד פיזיולוגי אובייקטיבי יכול לגשר.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-lbl">שאלת מחקר לדוגמה</div>
+        <p>האם חשיפה לגירוי רלוונטי לסכמת "נטישה" מייצרת פרופיל EDA+RSA שונה מגירוי נייטרלי? ואם הטיפול הצליח — האם הפרופיל משתנה? זאת שאלה שרק פסיכופיזיולוגיה יכולה לענות עליה.</p>
+      </div>
+    </section>
+
+    <figure class="fig">
+      <button class="shot" type="button" aria-label="הגדלת התמונה למסך מלא">
+        <img src="images/fig-schema.webp" alt="תרשים: פסיכופיזיולוגיה קלינית בסכמה תרפיה." width="1800" height="1005" loading="lazy" decoding="async">
+        <span class="shot-zoom" aria-hidden="true">⤢ הגדלה</span>
+      </button>
+      <figcaption>פסיכופיזיולוגיה קלינית בסכמה תרפיה — החתימות הסומטיות של מצבי-המוד (ילד פגיע, מגן מנותק, מבוגר בריא), והשוואה בין פסיכופיזיולוגיה פריפריאלית לנוירו-הדמיה מרכזית. (יצירה: NotebookLM)</figcaption>
+    </figure>
+
+    <!-- 1.5 -->
+    <section class="cs" id="challenges">
+      <h2><span class="n">1.5</span>אתגרים ומגבלות</h2>
+
+      <p>הכרת המגבלות מחזקת את המחקר, לא מחלישה אותו. חוקר שיודע מה הכלי לא יכול לעשות — מתכנן ניסויים טובים יותר.</p>
+
+      <ul class="lim-list">
+        <li>
+          <span class="lim-n">01</span>
+          <div class="lim-body">
+            <h4>ספציפיות תגובה אינדיווידואלית</h4>
+            <p>אנשים שונים מגיבים בדפוסים אידיוסינקרטיים יציבים: אצל אחד — בעיקר קרדיווסקולרי; אצל השני — בעיקר EDA; אצל שלישי — מעורב. Lacey & Lacey (1950s) הראו שאין מדד "אוניברסלי לסטרס". <strong>ההשלכה:</strong> עובדים עם <em>שינויים מהבייסליין האינדיווידואלי</em>, לא עם ערכים מוחלטים. ניתוח intra-subject לפני between-subjects.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">02</span>
+          <div class="lim-body">
+            <h4>חוק ערך ההתחלה של וילדר (Law of Initial Values)</h4>
+            <p>ויילדר (Wilder, 1962) הראה שעוצמת התגובה ולפעמים אפילו כיוונה — תלויים ברמת הבייסליין: בייסליין גבוה <em>מגביל</em> עלייה נוספת. בייסליין נמוך מאפשר עלייה גדולה יותר. <strong>ההשלכה:</strong> לעולם לא מנתחים תגובות ללא תיקון לבייסליין. ANCOVA או change scores מתוקנים — לא הפרש פשוט. גם הבייסליין עצמו דורש תקופת הרגעה מספקת.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">03</span>
+          <div class="lim-body">
+            <h4>ארטיפקטים</h4>
+            <p>תנועה, רעש חשמלי, הדבקה לא תקינה של אלקטרודות — כולם מייצרים אותות שנראים כמו תגובות פיזיולוגיות אמיתיות. ארטיפקטי תנועה במיוחד מהווים אתגר גדול עם מכשירים ניידים. ניקוי נתונים (signal cleaning) הוא שלב קריטי שדורש מומחיות.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">04</span>
+          <div class="lim-body">
+            <h4>בעיית הספציפיות הפסיכולוגית</h4>
+            <p>EDA גבוהה מעידה על עוררות סימפתטית — אבל לא על <em>איזה</em> רגש. פחד, כעס, ריגוש, עומס קוגניטיבי ותנועה — כולם יכולים לייצר פרופיל דומה. הספציפיות מגיעה <em>מהשילוב</em>: מדד + הקשר ניסויי + מסגרת תיאורטית. מדד בודד לבדו לא מספיק.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">05</span>
+          <div class="lim-body">
+            <h4>תקפות אקולוגית מול שליטה ניסויית</h4>
+            <p>מעבדה מבוקרת = שליטה גבוהה, תקפות אקולוגית נמוכה. מדידה ניידת בשטח = תקפות אקולוגית גבוהה, שליטה נמוכה. וילהלם וגרוסמן (Wilhelm & Grossman, 2010) הציעו שתי הגישות הכרחיות ומשלימות, לא מתחרות. מחקר קליני רלוונטי דורש את שתיהן.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">06</span>
+          <div class="lim-body">
+            <h4>משבר השיכפול ומדע פתוח</h4>
+            <p>פסיכופיזיולוגיה אינה חסינה בפני משבר השיכפול. Clayson (2021, 2024) טען שהתחום דורש "שדרוג פסיכומטרי דחוף". הלקח הפרקטי לחוקר חדש: <strong>רישום מוקדם</strong> של השערות ופרוטוקול ניתוח לפני איסוף נתונים; <strong>צינור עיבוד מתועד</strong> (כמו Neurokit2 ו-RHRV) לשקיפות ושחזוריות; <strong>מדגמים מספקים</strong>; <strong>ענוּת</strong> לגבי מה שניסוי בודד יכול להוכיח.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">07</span>
+          <div class="lim-body">
+            <h4>RSA אינו מדד ישיר ל"טונוס ואגלי"</h4>
+            <p>אזהרה קריטית למעבדה שמשתמשת ב-RSA. גרוסמן וטיילור (Grossman & Taylor, 2007) הראו ש-RSA מושפע מקצב נשימה, מנפח גאות, ומפעילות גופנית רגעית. גרוסמן (2023) מנסח חד: לראות ב-RSA "טונוס ואגלי" הוא <em>category mistake</em> — בלבול בין אינדקס מקורב לתופעה עצמה. <strong>ההשלכה:</strong> לדווח RSA תמיד לצד פרמטרי נשימה, ולנסח אותו כ"אינדקס מקורב לבקרה ואגלית בתנאים מבוקרים". המלצת מומחים טרייה (Menuet et al., 2025) אף מציעה להחליף את המונח RSA ב-<span class="en">respiratory heart rate variability (RespHRV)</span> — שינוי טרמינולוגי שכדאי להכיר.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lim-n">08</span>
+          <div class="lim-body">
+            <h4>"קל למדוד, קשה לפרש" — היזהרו מ-LF/HF</h4>
+            <p>קלות החישוב מסתירה מורכבות פרשנית. ה-Task Force (1996) עצמו הזהיר מ"מסקנות שגויות ואקסטרפולציות מופרזות". במיוחד: היחס <span class="en">LF/HF</span> כ"מאזן סימפתטי-פאראסימפתטי" הוא פישוט-יתר. יחידות מנורמלות LF(nu) ו-HF(nu) תלויות אלגברית זו בזו (סכומן 1), ואותו שינוי בפרופורציה יכול לנבוע מדפוסים פיזיולוגיים שונים לגמרי (Heathers, 2014; Billman, 2013). העיקרון העל חוזר: <strong>אין לפרש מדד בודד ללא הקשר.</strong></p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- MILESTONES TABLE (from xlsx) -->
+    <section class="cs" id="milestones">
+      <h2>ציר הזמן ואבני הדרך של הפסיכופיזיולוגיה הקלינית</h2>
+      <p>טבלה מסכמת — מ-1847 ועד היום: התגליות ואבני הדרך התיאורטיות, המדדים הפיזיולוגיים, המשמעות הפסיכולוגית, והיישום הקליני (המשוער) בהקשר של סכמה תרפיה. גללו לצדדים לטבלה המלאה.</p>
+      <div class="milestones">
+        <div class="milestones-scroll">
+          <table class="mtable" dir="ltr">
+            <thead>
+              <tr><th>Year / Period</th><th>Key Proponent(s)</th><th>Discovery / Theoretical Milestone</th><th>Physiological Measure(s)</th><th>Psychological Significance</th><th>Clinical Application (Inferred)</th><th>Src</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="yr">1847</td><td class="who">Carl Ludwig</td><td>First documentation of Respiratory Sinus Arrhythmia (RSA).</td><td>Heart rate fluctuations (RSA).</td><td>Observation of heart rate oscillations in synchrony with respiration.</td><td>Foundational observation for using heart rate variability to assess autonomic health in trauma recovery.</td><td class="src">1</td></tr>
+              <tr><td class="yr">1849</td><td class="who">Emil du Bois-Reymond</td><td>Discovery of electrical properties of human skin (electrodermal variations).</td><td>Skin electrical currents; immersion electrode setups.</td><td>Initially attributed to muscular phenomena; later established as a bridge to psychological experience and emotional stimulation.</td><td>Informs the biological basis for measuring non-conscious physiological arousal and anxiety management in trauma-informed assessments.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1872</td><td class="who">Charles Darwin</td><td>Evolutionary foundation of affective science (The Expression of the Emotions in Man and Animals).</td><td>Blushing, lacrimation, facial movements, posture, and cardiac acceleration.</td><td>Emotions viewed as phylogenetically conserved adaptations for survival, communication, and species-connected patterns.</td><td>Underpins the use of physiological markers to identify maladaptive survival patterns and distress signs in Schema Therapy.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1879</td><td class="who">Romain Vigouroux</td><td>Observation of psychological impact on basal skin resistance.</td><td>Basal Skin Resistance (BSR).</td><td>Linking skin electrical properties to psychological states.</td><td>Early precursor to using Electrodermal Activity (EDA) to track emotional arousal in therapy sessions.</td><td class="src">1</td></tr>
+              <tr><td class="yr">1884 - 1885</td><td class="who">William James and Carl Lange</td><td>James-Lange Somatic Theory of Emotion.</td><td>Reflexive somatic-autonomic adaptations (heart rate, cold sweat, visceral changes).</td><td>Conscious feeling of bodily changes constitutes the emotion; body as an active constituent of mind (e.g. we feel afraid because we tremble).</td><td>Foundation for interoceptive exposure and &#x27;bottom-up&#x27; interventions in trauma therapy that focus on bodily sensations to alter emotional states.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1888 - 1890</td><td class="who">Charles Féré, Ivan Tarchanoff, and Alfred Binet</td><td>Demonstration of exosomatic and endosomatic electrodermal activity (EDA).</td><td>Skin resistance (galvanometer), skin conductance, and naturally occurring potential differences.</td><td>Proved skin sensitivity to emotional/sensory stimuli, imagery, and mental arithmetic; connected electrical changes to internal physiological responses.</td><td>Provides methodology for detecting implicit emotional complexes (e.g. Vulnerable Child mode) and &#x27;schema triggers&#x27; through skin conductance.</td><td class="src">1-3</td></tr>
+              <tr><td class="yr">1907</td><td class="who">Frederick Peterson and Carl Jung</td><td>Linking EDA to &#x27;mental events&#x27; via word association tests.</td><td>Galvanic Skin Response (GSR).</td><td>Association of physiological arousal with subconscious complexes.</td><td>Validation of using physiological responses to identify deeply held maladaptive schemas.</td><td class="src">1</td></tr>
+              <tr><td class="yr">1915 - 1932</td><td class="who">Walter B. Cannon</td><td>Formulation of &#x27;Fight-or-Flight&#x27; response and Homeostasis.</td><td>Visceral changes and sympathetic-adrenal activation (e.g. heart rate elevation in anger/fear).</td><td>Thalamic theory; organism mobilises for emergency action while internal constancy is actively regulated.</td><td>Basis for understanding sympathetic over-activation in &#x27;Vulnerable Child&#x27; or &#x27;Angry Child&#x27; modes and treating PTSD.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1929</td><td class="who">Hans Berger</td><td>Discovery of the Electroencephalogram (EEG).</td><td>Electrical oscillations of the brain recorded from the scalp.</td><td>Delineated central brain activity from peripheral autonomic effector pathways.</td><td>Allows for the differentiation of cognitive processing from somatic arousal during therapy sessions.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1929 - 1949</td><td class="who">Walter Rudolf Hess</td><td>Functional organisation of the Autonomic Nervous System (ANS).</td><td>Ergotropic (sympathetic) and Trophotropic (parasympathetic) systems via diencephalic control.</td><td>Mapped hypothalamus as the coordinator of metabolic preparation (defense vs. recovery).</td><td>Framework for assessing the &#x27;metabolic cost&#x27; of emotional regulation or suppression in clinical patients.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1950s - 1960s</td><td class="who">John I. Lacey and Beatrice C. Lacey</td><td>Individual Response Specificity and Directional Fractionation.</td><td>Heart rate (HR) and electrodermal activity (EDA).</td><td>Individuals exhibit idiosyncratic physiological profiles (intake vs. rejection); systems can change in opposing directions based on attention.</td><td>Helps Schema Therapy identify unique physiological &#x27;somatic signatures&#x27; or modes rather than assuming uniform arousal across patients.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1960 - 1964</td><td class="who">Albert F. Ax; Society for Psychophysiological Research (SPR)</td><td>Institutionalisation of Psychophysiology as a formal discipline.</td><td>Multichannel polygraphs; standardised recording of EDA, HRV, RSA, and EMG.</td><td>Unified researchers under shared nomenclature and standards for measuring reciprocal relations between mind and body.</td><td>Standardised the diagnostic use of physiological markers and protocols in evaluating therapeutic efficacy and interventions.</td><td class="src">1, 2</td></tr>
+              <tr><td class="yr">1969 - 1975</td><td class="who">Neal Miller and Joe Kamiya</td><td>The Biofeedback Movement (Visceral Learning).</td><td>EEG rhythms, heart rate, renal blood flow, and skin temperature.</td><td>Exploration of voluntary self-regulation of the ANS; later understood as mediated by cognitive imagery or respiration.</td><td>Foundation for modern self-regulation techniques used to train patients in &#x27;Healthy Adult&#x27; mode flexibility.</td><td class="src">2</td></tr>
+              <tr><td class="yr">1973 - 1981</td><td class="who">B. McA. Sayers and Miriam Akselrod et al.</td><td>Identification of periodic oscillations and Power Spectrum Analysis for heart rate.</td><td>HRV Frequency Bands (Power Spectral Analysis).</td><td>Groundwork for non-invasively isolating parasympathetic (vagal) drive; variability redefined as a signal of cardiovascular regulation.</td><td>Enables quantitative measurement of a patient&#x27;s &#x27;vagal brake&#x27; capacity and resilience to manage emotional triggers.</td><td class="src">1-3</td></tr>
+              <tr><td class="yr">1994</td><td class="who">Antonio Damasio</td><td>Somatic Marker Hypothesis.</td><td>Anticipatory Skin Conductance Responses (SCR).</td><td>Bodily signals (somatic markers) bias decision-making; failure of these markers leads to social/personal impairment.</td><td>Explains &#x27;myopia for the future&#x27; in personality disorders as a failure of somatic feedback, guiding schema restructuring.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">1994 - 1995</td><td class="who">Stephen Porges</td><td>Polyvagal Theory.</td><td>Respiratory Sinus Arrhythmia (RSA); Ventral and Dorsal Vagal Complexes.</td><td>Phylogenetic hierarchy of response: Social Engagement (VVC), Mobilisation (SNS), and Immobilisation (DVC).</td><td>Central to trauma care; RSA used to index &#x27;relational safety&#x27; and move patients from &#x27;immobilisation&#x27; to &#x27;social engagement&#x27; modes.</td><td class="src">1-3</td></tr>
+              <tr><td class="yr">1996</td><td class="who">Task Force (ESC/NASPE)</td><td>Standardisation of HRV measurement and nomenclature.</td><td>Time-domain and Frequency-domain HRV (HF, LF).</td><td>Standardised measurement of autonomic nervous system balance.</td><td>Universal diagnostic standards for evaluating physiological resilience in clinical psychology.</td><td class="src">1</td></tr>
+              <tr><td class="yr">2000 - 2012</td><td class="who">Julian Thayer and Richard Lane</td><td>Model of Neurovisceral Integration.</td><td>Resting Heart Rate Variability (HRV) and RSA.</td><td>Prefrontal cortex inhibitory control over the amygdala is reflected in cardiac vagal tone.</td><td>Uses resting RSA as a marker of emotion regulation capacity to strengthen the &#x27;Healthy Adult&#x27; mode in Schema Therapy.</td><td class="src">1, 2</td></tr>
+              <tr><td class="yr">2000 - 2025</td><td class="who">Jochen Fahrenberg; Wilhelm and Grossman; Modern Researchers</td><td>Digital Integration and Ecological Momentary Assessment (EMA).</td><td>Wearables (PPG, EDA, ECG), triaxial accelerometry, and Machine Learning.</td><td>Shift toward measuring real-world clinical dyadic interactions, longitudinal naturalistic states, and digital biomarkers.</td><td>Enables monitoring of &#x27;Detached Protector&#x27; mode in daily life and predicts clinical risk or &#x27;Vulnerable Child&#x27; activation.</td><td class="src">2, 3</td></tr>
+              <tr><td class="yr">2021 - 2026</td><td class="who">Arntz; Pilkington; Thomas et al.; Krans et al.</td><td>Integration of Psychophysiology into Schema Therapy (Modern Era).</td><td>Skin Conductance (SC), HR, RSA (RespHRV).</td><td>Mapping Early Maladaptive Schemas (EMS) and Modes to physiological markers.</td><td>Use of objective physiological data to detect schema activation where self-report (Alexithymia) fails.</td><td class="src">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="m-legend"><b>מקורות:</b> 1 = סקירת Claude · 2 = סקירת Gemini · 3 = סקירת GPT — הקבצים זמינים להורדה למטה.</p>
+      </div>
+    </section>
+
+    <!-- SOURCE DOWNLOADS -->
+    <div class="sources-block">
+      <div class="sources-hd">
+        <span class="ico">📚</span>
+        <h3>סקירות הספרות שעליהן מבוסס הסקשן</h3>
+      </div>
+      <p class="sources-sub">התוכן בעמוד זה סונתז משלוש סקירות ספרות עצמאיות שהופקו בכלי AI שונים (Claude, GPT, Gemini) ואומתו מול מאגרים אקדמיים. הקבצים זמינים לעיון והורדה כמסמכי Word.</p>
+      <div class="sources-list">
+
+        <div class="source-row">
+          <span class="source-icon">📄</span>
+          <div class="source-meta">
+            <div class="source-name">סקירת ספרות — Claude <span class="source-lang">עברית</span></div>
+            <div class="source-desc">סינתזה מסונתזת עם דגש על מבנה פדגוגי, זהירות אפיסטמית והמלצות אינטגרציה</div>
+          </div>
+          <div class="source-actions">
+            <a href="downloads/literature-review-claude.docx" class="source-btn view" target="_blank" rel="noopener">עיון</a>
+            <a href="downloads/literature-review-claude.docx" class="source-btn dl" download>הורדה</a>
+          </div>
+        </div>
+
+        <div class="source-row">
+          <span class="source-icon">📄</span>
+          <div class="source-meta">
+            <div class="source-name">סקירת ספרות — GPT <span class="source-lang">English</span></div>
+            <div class="source-desc">רקע היסטורי ומושגי, עם דגש על נרטיב התפתחות התחום ובעיית ההיסק</div>
+          </div>
+          <div class="source-actions">
+            <a href="downloads/literature-review-gpt.docx" class="source-btn view" target="_blank" rel="noopener">עיון</a>
+            <a href="downloads/literature-review-gpt.docx" class="source-btn dl" download>הורדה</a>
+          </div>
+        </div>
+
+        <div class="source-row">
+          <span class="source-icon">📄</span>
+          <div class="source-meta">
+            <div class="source-name">סקירת ספרות — Gemini <span class="source-lang">English</span></div>
+            <div class="source-desc">מדריך היסטורי קליני, עם פירוט על שיטות מדידה, סטנדרטיזציה ופרופילי מודים</div>
+          </div>
+          <div class="source-actions">
+            <a href="downloads/literature-review-gemini.docx" class="source-btn view" target="_blank" rel="noopener">עיון</a>
+            <a href="downloads/literature-review-gemini.docx" class="source-btn dl" download>הורדה</a>
+          </div>
+        </div>
+
+      </div>
+      <p class="sources-note">הערה: סקירות אלו הן חומר מקור גולמי — תשתית מחקרית שממנה נשאב התוכן המוגמר. הן עשויות להכיל חפיפות, סימוני עבודה והערות פנימיות. הטקסט בעמוד הוא הגרסה המסונתזת והערוכה.</p>
+    </div>
+
+    <a href="../measures/" class="next-sec">
+      <div>
+        <div class="next-lbl">Section הבא</div>
+        <div class="next-title">מפת המדדים הפיזיולוגיים</div>
+      </div>
+      <div class="next-arrow">←</div>
+    </a>
+  </main>
+</div>
+
+<script>
+const TL = [
+  {
+    era:'שחר הפסיכופיזיולוגיה', cls:'e1', grpCls:'e1-group', yrs:'1847–1929',
+    events:[
+      {yr:1847, title:'לודוויג מתעד את RSA — תנודת הדופק בקצב הנשימה', auth:'Carl Ludwig',
+       brief:'התיעוד המוקדם של שונות הדופק בסנכרון עם נשימה — שורש המסלול הקרדיווסקולרי.',
+       full:'הפיזיולוג הגרמני קרל לודוויג תיעד לראשונה שקצב הלב משתנה באופן שיטתי בקצב הנשימה — מאיץ בשאיפה ומאט בנשיפה. זוהי הצפייה המוקדמת ב-RSA (respiratory sinus arrhythmia), שורש המסלול הקרדיווסקולרי של התחום. בעוד שהמסלול האלקטרודרמלי (עור) נחקר במקביל, המסורת הזו — יחד עם עבודתו של קלוד ברנאר על קשר לב-מוח — הניחה את היסוד למודל הנוירו-ויסצרלי המודרני (Thayer & Lane). ההיסטוריה של HRV מתועדת אצל Ernst (2017).'},
+      {yr:1849, title:'גילוי תגובת העור הגלוונית', auth:'Emil du Bois-Reymond',
+       brief:'תיאור ראשון של שינויים בהתנגדות החשמלית של העור — שורש המסלול האלקטרודרמלי.',
+       full:'הפיזיולוג הגרמני du Bois-Reymond, תוך כדי חקר חשמל בשרירים, זיהה שינויים חשמליים בעור. בתחילה פורשו כתופעה שרירית גרידא — ללא מסגרת פסיכולוגית לפרשנות. רק עשורים מאוחר יותר (Vigouroux 1879, Féré 1888) הובן הקשר לבלוטות הזיעה ולמערכת העצבים הסימפתטית. ההיסטוריה הזאת מלמדת: גילוי אינסטרומנטלי קדם לגילוי פסיכולוגי בעשרות שנים. ההיסטוריה האמינה של התחום מתוארת אצל Neumann & Blanton (1970).'},
+      {yr:1872, title:'"הבעת הרגשות" — הגוף כחלון לנפש', auth:'Charles Darwin',
+       brief:'דרווין מבסס את הרעיון שרגשות מתבטאים גופנית באופן אוניברסלי ואבולוציוני.',
+       full:'ב-The Expression of the Emotions in Man and Animals, דרווין טען שביטויים רגשיים — כולל תגובות אוטונומיות כמו האדמה, האצת לב ובכי — הם לא תנועות שרירותיות אלא דפוסים שמורים מבחינה פילוגנטית, המשרתים הסתגלות והתקשרות חברתית. המהלך המרכזי: הגוף הפך ממושא פיזיולוגי לחלון לתוך הנפש. פסיכופיזיולוגיה מודרנית יורשת ישירות מהמהלך הזה.'},
+      {yr:1884, title:'תיאוריית ג\'יימס-לאנגה: הגוף קודם לרגש', auth:'William James & Carl Lange',
+       brief:'"אנחנו עצובים כי אנחנו בוכים" — הרגש הוא תפיסת שינוי גופני, לא גורם לו.',
+       full:'ג\'יימס (1884) ולאנגה (1885) הציעו בנפרד: לא הפחד גורם לדפיקות לב — אלא תפיסת דפיקות הלב גורמת לחוויית הפחד. המהלך היה מהפכני: הגוף אינו מיכל פסיבי של הנפש, אלא מרכיב פעיל בבניית החוויה הרגשית. התיאוריה נשארת שנויה במחלוקת אבל ממשיכה להדהד: Embodied Cognition, Somatic Marker Hypothesis, ואינטרוצפציה — כולם ילדים של ג\'יימס.'},
+      {yr:1888, title:'שלוש אבני יסוד למדידת EDA', auth:'Vigouroux · Féré · Tarchanoff',
+       brief:'מ-1879 עד 1890: שתי שיטות המדידה (אקסוסומטית ואנדוסומטית) שעדיין בשימוש היום.',
+       full:'שלושה חוקרים הניחו את היסוד למדידת EDA תוך עשור: ויגורו (Vigouroux, 1879) ערך את התצפיות הראשונות על קשר בין גורמים פסיכולוגיים לתנגודת עורית בסיסית. שארל פרה (Féré, 1888) הוכיח שכשמעבירים זרם חיצוני חלש דרך העור (שיטה אקסוסומטית — הנפוצה עד היום), גירויים רגשיים מגבירים את ההולכה. הפיזיולוג הרוסי טרחנוף (Tarchanoff, 1890) קיבל הסטות גלוונומטר ללא זרם חיצוני (שיטה אנדוסומטית — פוטנציאל עור). הערה מתקנת מיתוס: לפי Neumann & Blanton, סביר ש-Tarchanoff הכיר את עבודת Féré, וזו לא הייתה תגלית עצמאית לגמרי.'},
+      {yr:1907, title:'יונג ו-Veraguth: EDA נכנס לקליניקה', auth:'Peterson & Jung (Brain)',
+       brief:'הניסויים הראשונים שקשרו את תגובת העור ל"אירועים נפשיים" דרך מבחני אסוציאציות.',
+       full:'פיטרסון ויונג פרסמו ב-Brain (1907) את הניסויים הראשונים שקשרו את תופעת תגובת העור ל"אירועים נפשיים" דרך מבחני אסוציאציות מילוליות — מה שכונה "הרפלקס הפסיכוגלוואני". כאן נכנס יונג ל"סיפור" של פסיכיאטריה ביולוגית, עוד לפני הפסיכואנליזה. האירוע מסמן שניים: את המעבר מהמעבדה הפיזיולוגית לשימוש קליני, ואת הרעיון שפיזיולוגיה יכולה לחשוף מה הדיווח המודע מסתיר — רעיון שעדיין מרכזי בשדה.'},
+      {yr:1929, title:'EEG ומחקר ANS — שתי פריצות דרך', auth:'Hans Berger & Walter Hess',
+       brief:'ברגר ממציא EEG; הס מיפה את ANS ואת המרכזים ההיפותלמיים שלה (פרס נובל 1949).',
+       full:'שנת 1929 הייתה עמוסה: ברגר מציג EEG ומוכיח שניתן למדוד פעילות מוחית דרך הגולגולת — פותח ענף שלם של נוירומדע מרכזי. הס מיפה את התחום ההיפותלמי וחילק את ANS ל-"ארגוטרופי" (סימפתטי, קטבולי, גיוס לפעולה) ו"תרופוטרופי" (פרה-סימפתטי, אנבולי, שחזור). הבחנה שעדיין מכוננת: "מדידת המוח" ≠ "מדידת הגוף" — שתי ענפי מדע שלמים.'}
+    ]
+  },
+  {
+    era:'ייסוד התחום', cls:'e2', grpCls:'e2-group', yrs:'1930–1979',
+    events:[
+      {yr:1932, title:'Fight-or-Flight, Homeostasis — ו"הוא טעה חלקית"', auth:'Walter Cannon',
+       brief:'קנון מגדיר fight-or-flight ומבקר ג\'יימס-לאנגה — אבל המדע המודרני מגלה שהביקורת הייתה חלקית בלבד.',
+       full:'ב-The Wisdom of the Body, קנון פיתח homeostasis ותיאר כיצד הגוף מגייס משאבים מול איום. ב-1927 הוא ביקר את ג\'יימס-לאנגה: הוויסצרה איטיים מדי, לא מובחנים מספיק, ורגשות שונים (פחד, כעס) גורמים לאותן תגובות. הביקורת הייתה חזקה ושלטה בשדה לעשורים. אבל המדע המודרני מצא שקנון טעה חלקית: תגובות ויסצרליות מובחנות יותר ממה שחשב, ואות גוף עדין מגיע למוח מהר יותר ממה שחשב — ומשפיע על עיבוד קוגניטיבי.'},
+      {yr:1956, title:'לייסי: אין "עוררות כללית"', auth:'John & Beatrice Lacey',
+       brief:'שלושה גילויים שהרסו את מודל "העוררות האחת" — ושינו את הפסיכופיזיולוגיה לנצח.',
+       full:'לייסי (עם רעייתו ביאטריס) תרם שלושה דברים מרכזיים: (1) ספציפיות תגובה אינדיווידואלית: כל אחד מגיב בפרופיל אוטונומי אידיוסינקרטי יציב — לא "עוררות אחת" אלא פרופילים ייחודיים לאדם. (2) פרקציונציה כיוונית: בחשיפה לתמונות מעוררות, הדופק לפעמים יורד בזמן שה-EDA עולה — אותות שונים נעים בכיוונים שונים בהתאם לדרישות הסביבה. (3) השערת הזיווג הלב-גוף: לייסי טען שהאטת הדופק מפחיתה לחץ בברורצפטורים ומגבירה עיבוד חושי. ג\'ון אובריסט (Obrist) חלק עליו — טענתו: ירידת הדופק בתשומת לב היא בעיקר השפעת מנוחת שרירים, לא מנגנון ספציפי. המחלוקת ייצרה תיאוריות מדויקות יותר ועשירות יותר לשניהם.'},
+      {yr:1960, title:'ייסוד SPR ו-Psychophysiology', auth:'Albert Ax & קהילת המחקר',
+       brief:'מ"לסרוק 80+ כתבי עת" לדיסציפלינה: חברה, כתב עת, ושפה מחקרית משותפת.',
+       full:'הסיפור ממחיש את הצורך: בשנות ה-50, אלברט אקס החל להפיץ את ה-Psychophysiology Newsletter (1955), כי מי שעסק במדידה פיזיולוגית של תהליכים נפשיים נאלץ לחפש מאמרים בפזורה של עשרות כתבי עת. בכנס 1959 בסינסינטי הוחלט להקים אגודה. ה-SPR הוקמה ב-1960 וכתב העת Psychophysiology יצא ב-1964. הפתיח של הגיליון הראשון (Ax, 1964) מתאר שחוקרים נאלצו לסרוק יותר מ-80 כתבי עת — בדיוק הבעיה שהאגודה באה לפתור. במקום "פיזיולוג שחוקר פסיכולוגיה" — עכשיו יש פסיכופיזיולוג.'},
+      {yr:1971, title:'סטנדרטיזציה של מדידת EDA', auth:'Lykken & Venables',
+       brief:'"אל תמדדו GSR סתם" — שיטת מדידה סטנדרטית שאיפשרה השוואה בין מעבדות.',
+       full:'ליקן וננבלס (Lykken & Venables, 1971) פרסמו מאמר משפיע בשם המתריס "Direct measurement of skin conductance: A proposal for standardization". הם הציעו מדידה במתח קבוע (constant voltage) שתאפשר השוואה בין מחקרים. זהו צעד מכריע בהתבגרות המתודולוגית: בלי סטנדרטיזציה, כל מעבדה מדדה אחרת ואי אפשר היה לצבור ידע. בהמשך, ועדות ה-SPR פרסמו המלצות פרסום מחייבות (Fowles et al., 1981; ואחר כך הדו"ח המקיף של Boucsein et al.), שהן עד היום מקור הסף ל-EDA.'},
+      {yr:1969, title:'מהפכת הביופידבק — ומה ניתן ללמוד ממנה', auth:'Miller, Green, Schwartz, Brown',
+       brief:'נראה שאפשר לשלוט בלב ובלחץ דם מרצון — ואז הניסויים לא השתכפלו.',
+       full:'ניל מילר (1969) טען שחולדות מוחלשות ב-curare למדו לשלוט ישירות בדופק ובאיברים פנימיים. גרין, שוורץ ואחרים הרחיבו זאת לבני אדם: שליטה בגלי מוח, לחץ דם וטמפרטורת עור. ההשלכות נראו עצומות. אבל — הניסויים לא השתכפלו. מילר עצמו לא הצליח לחזור על הממצאים. הלקח: שליטה אוטונומית אפשרית אבל מוגבלת, ולרוב מתווכת בדרכים עקיפות (נשימה, תנועה, דמיון מודרך). הביופידבק לא מת, אבל הצניע תביעותיו.'},
+      {yr:1973, title:'HRV: הרעש הפך לאות', auth:'B. McA. Sayers',
+       brief:'ניתוח ספקטרום של פעימות הלב חשף שהשונות אינה רעש — אלא מידע.',
+       full:'סיירס (1973) הראה שהשונות בין-פעימות לב (HRV) מכילה רכיבים תדירותיים מובחנים: אחד קשור לנשימה, אחד לוויסות לחץ דם (ברורצפטורים), אחד לתרמו-ויסות. ניתוח ספקטרום טרנספורם HRV מ"רעש" ל"אות". הדלת נפתחה: RSA — רכיב תדר הנשימה של HRV — הפכה למדד מרכזי לגמישות אוטונומית. (הערה: הקישור בין RSA ל"טונוס ואגלי" נראה אז ישיר יותר ממה שהמדע המאוחר יגלה — ראו אתגר 07 בהמשך.)'},
+      {yr:1981, title:'Akselrod: HRV הופך לכלי כמותי', auth:'Akselrod et al. (Science)',
+       brief:'ניתוח ספקטרלי של תנודות הדופק כ"בדיקה כמותית" של בקרה אוטונומית beat-to-beat.',
+       full:'אקסלרוד ועמיתים פרסמו ב-Science (1981) את "Power spectrum analysis of heart rate fluctuation: a quantitative probe of beat-to-beat cardiovascular control". זהו הרגע שבו HRV הופך מתופעה נצפית לכלי מדידה כמותי מדויק. ניתוח ה-power spectrum איפשר להפריד בין רכיבי תדר שונים ולכמת אותם — תשתית לכל מחקר HRV ו-RSA מודרני, וגם לבאנדים התדריים (HF: 0.15–0.4 Hz) שיוסדרו רשמית ב-1996.'},
+    ]
+  },
+  {
+    era:'מהפכה דיגיטלית', cls:'e3', grpCls:'e3-group', yrs:'1980–1999',
+    events:[
+      {yr:1985, title:'המחשב שינה הכל', auth:'מהפכה טכנולוגית',
+       brief:'מהנייר למסך: רכישה דיגיטלית, FFT, עיבוד בזמן אמת — מדע חדש.',
+       full:'עד תחילת שנות ה-80, ניתוח EDA ו-ECG נעשה ידנית על נייר. כניסת מחשבים אישיים עם ממירי A/D שינתה הכל: דגימה מרובת ערוצים בתדר גבוה, זיהוי R-peaks אוטומטי, Fast Fourier Transform, סינון דיגיטלי, ויזואליזציה בזמן אמת, ומדגמים גדולים פי כמה. מה שנראה כשדרוג טכני היה שינוי אפיסטמי: פסיכופיזיולוגיה מודרנית — כפי שאנחנו מכירים אותה — בלתי אפשרית ללא המהפכה הדיגיטלית.'},
+      {yr:1996, title:'Task Force: התקן המכונן ל-HRV', auth:'ESC & NASPE Task Force',
+       brief:'המסמך שמסדיר נומנקלטורה, שיטות, ובאנדים תדריים — שכל ניתוח HRV מתייחס אליו עד היום.',
+       full:'ועדה משותפת של ה-European Society of Cardiology וה-North American Society of Pacing and Electrophysiology (Malik et al., 1996) פרסמה את המסמך המכונן שמסדיר את חקר ה-HRV: נומנקלטורה אחידה, שיטות מדידה (time-domain ו-frequency-domain), והגדרת הבאנדים התדריים (HF: 0.15–0.4 Hz; LF: 0.04–0.15 Hz). זה המקור הקנוני שכל ניתוח HRV מתייחס אליו. אבל המסמך עצמו הזהיר מפני "מסקנות שגויות ואקסטרפולציות מופרזות" — קלות החישוב מסתירה מורכבות פרשנית (ראו אתגר 08).'},
+      {yr:1994, title:'Descartes\' Error — הגוף בקבלת החלטות', auth:'Antonio Damasio',
+       brief:'Somatic Marker Hypothesis: ללא תחושות גופניות, קבלת החלטות קורסת.',
+       full:'דמאסיו (1994) ניתח חולים עם פגיעה ב-vmPFC (כמו Phineas Gage ו-Patient EVR): אינטליגנציה שלמה, אבל קבלת החלטות קורסת בחיים האמיתיים. ה-Iowa Gambling Task הדגים זאת: נבדקים בריאים פיתחו SCR אנטיציפטורי לפני בחירה מסוכנת (הגוף "ידע" לפני התודעה). חולי vmPFC — לא. הביקורת: האם המטלה מבודדת למידה אימפליציטית? האם ה-SCR הוא סיבה או מתאם? הדיון עדיין פתוח, אבל התרומה ברורה: הגוף אינו רק תוצר של הנפש — הוא שותף בחשיבה.'},
+      {yr:1994, title:'Polyvagal Theory — ובפולמוס שסביבה', auth:'Stephen Porges',
+       brief:'שלושה מסלולים אוטונומיים, RSA כמדד בטיחות-וקשר — ושנויה במחלוקת מדעית רחבה.',
+       full:'פורג\'ס (1994, 2001, 2011) הציע שמערכת העצבים האוטונומית מארגנת שלושה מסלולים בהיררכיה פילוגנטית: (1) Dorsal Vagal — בלתי מיוליין, בלימה ו-shutdown בסכנת חיים; (2) Sympathetic — fight-or-flight; (3) Ventral Vagal — מיוליין, ייחודי לבעלי חיים חברתיים, ממלא תפקיד ב"מעורבות חברתית" ובביטחון. RSA = מדד פעילות ה-VVC. ה-Social Engagement System מחבר פנים, קול, והאזנה לוויסות קרדיאלי. התיאוריה אומצה רחבות בטיפול, אבל הביקורת המדעית חריפה: גרוסמן ועמיתים (38 חוקרים!, 2026) פרסמו "Why the Polyvagal Theory is Untenable" — הטענה שהנוירואנטומיה מוגזמת, RSA אינה מדד ישיר ל-VVC, והנרטיב הפילוגנטי לא נתמך. פורג\'ס השיב ב-"When a Critique Becomes Untenable." ל<strong>מחקר חדש:</strong> השתמש בPVT כהמסגרה ומקור השערות, לא כעובדות מוגמרות.'}
+    ]
+  },
+  {
+    era:'עידן הנתונים', cls:'e4', grpCls:'e4-group', yrs:'2000–היום',
+    events:[
+      {yr:2005, title:'פסיכופיזיולוגיה אמבולטורית ו-EMA', auth:'Fahrenberg, Wilhelm & Grossman',
+       brief:'מחקר בשטח: EDA ו-HRV בחיי היומיום, מחוברים לדיווח עצמי בזמן אמת.',
+       full:'EMA (Ecological Momentary Assessment) בשילוב פסיכופיזיולוגיה שינה שאלות מחקר: לא "מה קורה בגוף במעבדה" אלא "מה קורה בגוף כשאני מדבר עם בן-זוגי, נמצא בפגישה קשה, או בא מהעבודה הביתה". וילהלם וגרוסמן (2010) עיצבו את הפרדיגמה: מדידה רצופה + דיווח מיידי + הקשר טבעי = תמונה שמעבדה לא יכולה לתת. ההגבלה: פחות שליטה, יותר ארטיפקטים, פחות פרשנות ספציפית.'},
+      {yr:2012, title:'מכשירים לבישים — פסיכופיזיולוגיה ניידת', auth:'Empatica E4, Shimmer',
+       brief:'EDA ו-HRV על פרק היד — מחקר אמיתי בעולם האמיתי, עם מחיר.',
+       full:'ה-Empatica E4 ומכשירי Shimmer הביאו EDA, PPG (פוטופלטיסמוגרפיה), ותאוצה לשורש היד. נאמינות גבוהה בתנאים מבוקרים; בחיי היומיום — ירידה בתקפות ועלייה בארטיפקטים. המחקר הורחב: אינטראקציות טיפוליות, שינה, סטרס יומיומי — כולם כעת ניתנים לניטור. אבל: "נגישות" לא מכרעת "תקפות". צינורות עיבוד מתוחכמים הכרחיים, ואין לחלף בין ציון ה-E4 לציון BIOPAC מבוקר.'},
+      {yr:2020, title:'ML ו-AI — ניתוח אותות ומה שמעבר', auth:'שינוי שיטתי',
+       brief:'למידת מכונה מזהה artifacts, מסווגת רגשות ומחפשת ביומרקרים — עם מגבלות חשובות.',
+       full:'שימוש ML בפסיכופיזיולוגיה מוביל בשלושה תחומים: (1) זיהוי וניקוי artifacts אוטומטי (גם ב-EDA גולמית מהשטח); (2) סיווג מצבים רגשיים ממדדים מרובים; (3) חיפוש ביומרקרים לאבחון, ניבוי הישנות, מעקב טיפולי. הלכה למעשה: חבילות כמו NeuroKit2 (Python) ו-RHRV (R) עשו ניתוחים מורכבים לנגישים. האתגרים: "קופסה שחורה", הכללה מוגבלת בין אוכלוסיות, ומדגמים קטנים עם תיוג חלש. ביומרקרים "קליניים" הם כרגע לרוב מבטיחים, לא מוכחים.'},
+      {yr:2026, title:'Grossman et al.: "Polyvagal Theory is Untenable"', auth:'Grossman + 38 חוקרים, Porges בתגובה',
+       brief:'38 מומחים בנוירואנטומיה ואוטונומית מסכמים: הבסיסים האנטומיים של PVT אינם נתמכים.',
+       full:'בתחילת 2026, גרוסמן ו-38 חוקרים בינלאומיים מובילים פרסמו ב-Clinical Neuropsychiatry את "Why the Polyvagal Theory is Untenable" — ביקורת מקיפה שגורסת: (1) ה-DMNX (Dorsal Motor Nucleus) אינו אחראי ל-bradycardia רגשי/מסוכן ביונקים; (2) בעלי חיים לא-יונקים מציגים התנהגות חברתית מורכבת גם ללא vagus ממיאלן; (3) RSA אינה מדד ישיר ל-VVC ביוצאת הכלל. פורג\'ס הגיב ב-"When a Critique Becomes Untenable" — וטען שהביקורת מעריכה גרסה פשוטה מדי של התיאוריה. הדיון ממשיך. <strong>למחקר חדש:</strong> PVT מועילה כמסגרת קלינית והיוריסטית; יש לנקוט בזהירות בטענות אנטומיות ספציפיות ובפרשנות RSA כמדד בלעדי ל-VVC.'}
+    ]
+  }
+];
+
+function buildTL(){
+  const root=document.getElementById('tl-root');
+  TL.forEach((era,ei)=>{
+    const eg=document.createElement('div');
+    eg.className=`era-group ${era.grpCls}`;
+    eg.innerHTML=`<div class="era-hd"><span class="era-badge ${era.cls}">${era.era}</span><span class="era-yr">${era.yrs}</span></div><div class="tl-events">${era.events.map((ev,i)=>`<div class="tl-ev" id="ev${ei}-${i}" onclick="toggleEv('ev${ei}-${i}')"><div class="ev-hd"><span class="ev-yr">${ev.yr}</span><span class="ev-title">${ev.title}</span><span class="ev-auth">${ev.auth}</span><span class="ev-caret">▾</span></div><div class="ev-detail"><p class="ev-brief">${ev.brief}</p><p class="ev-full">${ev.full}</p></div></div>`).join('')}</div>`;
+    root.appendChild(eg);
+  });
+}
+function toggleEv(id){document.getElementById(id).classList.toggle('open');}
+
+const sections=['what-is','timeline','why-measure','schema','challenges'];
+function onScroll(){
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  if(h>0)document.getElementById('rp').style.transform=`scaleX(${window.scrollY/h})`;
+  const navH=90;let cur='';
+  sections.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY+navH>=el.offsetTop)cur=id;});
+  document.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+}
+document.addEventListener('DOMContentLoaded',()=>{buildTL();window.addEventListener('scroll',onScroll,{passive:true});onScroll();});
+</script>
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="מציג תמונות">
+  <button class="lb-close" id="lb-close" type="button" aria-label="סגירת התצוגה">&times;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lightbox'), img=document.getElementById('lb-img'), btn=document.getElementById('lb-close');
+  function open(src,alt){ img.src=src; img.alt=alt||''; lb.classList.add('open'); document.body.style.overflow='hidden'; btn.focus(); }
+  function shut(){ lb.classList.remove('open'); img.src=''; document.body.style.overflow=''; }
+  document.querySelectorAll('.fig .shot').forEach(function(b){
+    b.addEventListener('click', function(){ var i=b.querySelector('img'); if(i) open(i.currentSrc||i.src, i.alt); });
+  });
+  btn.addEventListener('click', shut);
+  lb.addEventListener('click', function(e){ if(e.target===lb) shut(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) shut(); });
+})();
+</script>
+<script src="../js/enhance.js"></script>
+<script>
+(function(){var el=document.getElementById('read-time');if(!el)return;var main=document.querySelector('.content');var txt=(main?main.textContent:'').replace(/\s+/g,' ').trim();var words=txt?txt.split(' ').length:0;var mins=Math.max(1,Math.round(words/180));el.textContent='⏱ כ-'+mins+' דק׳ קריאה';})();
+</script>
+<script src="../js/gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECG & RSA — קצב לב וויסות וגלי | Section 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Lato:wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shared.css">
+  <style>
+    .sk-banner {
+      display: flex; align-items: center; gap: 12px;
+      background: #F3EFF8; border: 1px solid #C5B0D8;
+      border-right: 4px solid var(--era-4);
+      padding: 14px 20px; border-radius: 0 3px 3px 0;
+      margin-bottom: 40px;
+    }
+    .sk-banner p { font-family: var(--font-ui); font-size: 0.85rem; color: #4A3060; margin: 0; line-height: 1.5; }
+    .sk-banner strong { color: #2E1A45; }
+    .sk-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+    .sk-card { border: 1.5px dashed var(--border-strong); border-radius: 4px; padding: 22px 24px; background: var(--bg-alt); }
+    .sk-card-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .sk-num { font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; color: var(--text-light); background: var(--border); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-title { font-size: 1.05rem; font-weight: 700; color: var(--text); flex: 1; }
+    .sk-badge { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); border: 1px solid var(--border-strong); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-desc { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 12px; line-height: 1.65; }
+    .sk-topics { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .sk-topics li { font-family: var(--font-ui); font-size: 0.82rem; color: var(--text-light); padding-right: 14px; position: relative; }
+    .sk-topics li::before { content: '·'; position: absolute; right: 0; color: var(--border-strong); }
+  </style>
+  <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
+  <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../" class="site-title">מדריך <em>פסיכופיזיולוגיה</em></a>
+    <ul class="nav-links">
+      <li><a href="../intro/">מבוא</a></li>
+      <li><a href="../measures/">מדדים</a></li>
+      <li><a href="../eda/">EDA</a></li>
+      <li><a href="../ecg-rsa/" class="here">ECG &amp; RSA</a></li>
+      <li><a href="../case-study/">ניתוח מקרה</a></li>
+      <li><a href="../resources/">משאבים</a></li>
+    </ul>
+  </div>
+</nav>
+<div id="rp"></div>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-label">בסקשן זה</div>
+      <ul class="toc">
+        <li><a href="#vagal"><span class="toc-n">4.1</span>Vagal Tone וויסות</a></li>
+        <li><a href="#ecg-signal"><span class="toc-n">4.2</span>אות ה-ECG</a></li>
+        <li><a href="#pipeline"><span class="toc-n">4.3</span>מ-ECG ל-RSA</a></li>
+        <li><a href="#hrv-vs-rsa"><span class="toc-n">4.4</span>HRV מול RSA</a></li>
+        <li><a href="#equipment"><span class="toc-n">4.5</span>ציוד והצבה</a></li>
+        <li><a href="#processing"><span class="toc-n">4.6</span>עיבוד ובקרת איכות</a></li>
+        <li><a href="#r-code"><span class="toc-n">4.7</span>ניתוח ב-R</a></li>
+      </ul>
+      <div class="sec-prog">
+        <div class="prog-lbl">Section 4 מתוך 6</div>
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot on"></div>
+          <div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="sec-head">
+      <span class="sec-tag">Section 4 · ECG &amp; RSA</span>
+      <h1>קצב הלב, HRV ו-RSA<br><span style="font-weight:300;font-size:0.75em;">מדריך מלא לוויסות וגלי</span></h1>
+      <p class="sec-intro">RSA — שונות קצב הלב בתדר הנשימה — היא מדד המרכזי לפעילות ה-Vagus Nerve ולגמישות הרגשית. מהאות הגולמי ועד לניתוח ב-R.</p>
+    </header>
+
+    <div class="sk-banner">
+      <span>❤️</span>
+      <p><strong>סקשן זה בפיתוח.</strong> המבנה המלא מוכן — תוכן יוחלף לאחר שלב המחקר.</p>
+    </div>
+
+    <div class="sk-grid">
+
+      <div class="sk-card" id="vagal">
+        <div class="sk-card-head">
+          <span class="sk-num">4.1</span>
+          <span class="sk-title">Vagal Tone, Polyvagal Theory וויסות רגשי</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">הבסיס התיאורטי: מדוע RSA — מדד של ה-Vagus Nerve — הפך למדד המרכזי לויסות רגשי וגמישות אוטונומית. הקשר לסכמה תרפיה ולקשר בין-אישי.</p>
+        <ul class="sk-topics">
+          <li>Polyvagal Theory: Ventral Vagal, Sympathetic, Dorsal Vagal — סיכום מהיר</li>
+          <li>Cardiac Vagal Tone: מה זה אומר ולמה RSA מודד אותו</li>
+          <li>RSA כאינדיקטור לגמישות רגשית: Thayer & Lane (2000), Beauchaine (2001)</li>
+          <li>RSA בהקשר קליני: חרדה, דיכאון, BPD, ורלוונטיות לסכמה תרפיה</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="ecg-signal">
+        <div class="sk-card-head">
+          <span class="sk-num">4.2</span>
+          <span class="sk-title">אות ה-ECG — P, QRS, T</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">קריאת אות ECG: מה כל גל מייצג, מדוע R-peak הוא נקודת הייחוס, ואיך מהאות הגולמי מוצאים את מרווחי הזמן בין פעימות.</p>
+        <ul class="sk-topics">
+          <li>גל P, קומפלקס QRS, גל T — מה כל אחד מייצג פיזיולוגית</li>
+          <li>R-peak: למה זה נקודת הייחוס לחישוב HRV</li>
+          <li>IBI (Inter-Beat Interval): מה זה ואיך מחשבים</li>
+          <li>ויזואל: ECG נורמלי עם הסברים על כל גל</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="pipeline">
+        <div class="sk-card-head">
+          <span class="sk-num">4.3</span>
+          <span class="sk-title">הצינור האנליטי: מ-ECG ל-IBI ל-HRV ל-RSA</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">השלבים מהאות הגולמי ועד למדד RSA: כל שלב, ההיגיון מאחוריו, ומה יכול להשתבש בכל אחד.</p>
+        <ul class="sk-topics">
+          <li>שלב 1: R-peak detection — שיטות וקריטריוני איכות</li>
+          <li>שלב 2: IBI series — בניית סדרת הזמן הבין-פעימתית</li>
+          <li>שלב 3: HRV — ניתוח בתחום הזמן (RMSSD, SDNN)</li>
+          <li>שלב 4: ניתוח ספקטרום — LF, HF, ו-RSA (HF component)</li>
+          <li>ויזואל: דיאגרמת הצינור האנליטי</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="hrv-vs-rsa">
+        <div class="sk-card-head">
+          <span class="sk-num">4.4</span>
+          <span class="sk-title">HRV מול RSA — מה ההבדל ומתי כל אחד?</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">בלבול נפוץ: HRV ו-RSA לא אותו דבר. מתי משתמשים ב-RMSSD? מתי ב-HF-HRV? מה הקשר לנשימה ולמה היא confound קריטי?</p>
+        <ul class="sk-topics">
+          <li>HRV (כללי) vs. RSA (ספציפי לתדר הנשימה): ההבחנה</li>
+          <li>RMSSD: מדד זמן פשוט שמתאם גבוה עם RSA — מתי לשתמש</li>
+          <li>HF-HRV: המדד הספקטרלי — יתרונות וחסרונות</li>
+          <li>נשימה כ-confound: למה חשוב לשלוט בקצב הנשימה בפרוטוקול</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="equipment">
+        <div class="sk-card-head">
+          <span class="sk-num">4.5</span>
+          <span class="sk-title">ציוד, הצבת אלקטרודות ו-Confounds</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">ECG מדיד בשיטות שונות (חזה, שורש יד, אצבע). ההבדלים בין מכשירים, הנחיות הצבה מעשיות, ומה לשלוט בו בפרוטוקול.</p>
+        <ul class="sk-topics">
+          <li>מכשירים: Shimmer ECG, BIOPAC, E4 (PPG בלבד) — מה ההבדלים</li>
+          <li>Lead configurations: Einthoven Lead I, II, III — מתי כל אחד</li>
+          <li>הכנת עור: גילוח, ניקוי, סוג ג'ל — פרוטוקול מעשי</li>
+          <li>Confounds קריטיים: נשימה, תנועה, קפאין, מחזור שינה</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="processing">
+        <div class="sk-card-head">
+          <span class="sk-num">4.6</span>
+          <span class="sk-title">עיבוד ובקרת איכות</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">ניקוי אות ECG, זיהוי R-peaks שגויים (ectopic beats), interpolation, וקביעת חלונות ניתוח — מה מקובל ומה שנוי במחלוקת.</p>
+        <ul class="sk-topics">
+          <li>זיהוי R-peaks: pan-tompkins ואלגוריתמים אחרים</li>
+          <li>Ectopic beats: זיהוי ותיקון — שיטות שונות</li>
+          <li>Interpolation: מתי מותר ומתי פוסל</li>
+          <li>Window length: כמה זמן צריך לחישוב RSA אמין?</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="r-code">
+        <div class="sk-card-head">
+          <span class="sk-num">4.7</span>
+          <span class="sk-title">ניתוח ב-R — קוד מוסבר שלב אחר שלב</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">קוד R מלא מטעינת קובץ ECG גולמי ועד לחישוב RMSSD, HF-HRV, ו-RSA. כל שורה מוסברת. מבוסס על חבילת RHRV ועל tidyverse.</p>
+        <ul class="sk-topics">
+          <li>ייבוא נתונים מ-Shimmer / BIOPAC / E4</li>
+          <li>R-peak detection עם RHRV</li>
+          <li>חישוב: RMSSD, SDNN, HF-HRV, RSA</li>
+          <li>ויזואליזציה: IBI series, power spectrum, ggplot2</li>
+          <li>📥 קובץ .R להורדה (יתווסף)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <nav class="page-nav">
+      <a href="../eda/" class="page-nav-btn prev">
+        <span class="pn-arrow">→</span>
+        <div><div class="pn-dir">Section הקודם</div><div class="pn-title">EDA — פעילות אלקטרודרמלית</div></div>
+      </a>
+      <a href="../case-study/" class="page-nav-btn">
+        <div><div class="pn-dir">Section הבא</div><div class="pn-title">ניתוח מקרה</div></div>
+        <span class="pn-arrow">←</span>
+      </a>
+    </nav>
+  </main>
+</div>
+
+<script>
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rp').style.transform = `scaleX(${window.scrollY / h})`;
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script src="../js/enhance.js"></script>
+<script src="../js/gate.js"></script>
+</body>
+</html>

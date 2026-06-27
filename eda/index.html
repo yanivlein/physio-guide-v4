@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDA — פעילות אלקטרודרמלית | Section 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Lato:wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shared.css">
+  <style>
+    .sk-banner {
+      display: flex; align-items: center; gap: 12px;
+      background: #EDF4EF; border: 1px solid #B0CFB8;
+      border-right: 4px solid var(--era-3);
+      padding: 14px 20px; border-radius: 0 3px 3px 0;
+      margin-bottom: 40px;
+    }
+    .sk-banner-icon { font-size: 1.1rem; }
+    .sk-banner p { font-family: var(--font-ui); font-size: 0.85rem; color: #2E5A3A; margin: 0; line-height: 1.5; }
+    .sk-banner strong { color: #1E3A28; }
+    .sk-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+    .sk-card {
+      border: 1.5px dashed var(--border-strong);
+      border-radius: 4px; padding: 22px 24px;
+      background: var(--bg-alt); position: relative;
+    }
+    .sk-card-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .sk-num {
+      font-family: var(--font-ui); font-size: 0.72rem;
+      font-weight: 700; color: var(--text-light);
+      background: var(--border); padding: 2px 8px; border-radius: 2px; flex-shrink: 0;
+    }
+    .sk-title { font-size: 1.05rem; font-weight: 700; color: var(--text); flex: 1; }
+    .sk-badge {
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-light); border: 1px solid var(--border-strong);
+      padding: 2px 8px; border-radius: 2px; flex-shrink: 0;
+    }
+    .sk-desc { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 12px; line-height: 1.65; }
+    .sk-topics { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .sk-topics li {
+      font-family: var(--font-ui); font-size: 0.82rem;
+      color: var(--text-light); padding-right: 14px; position: relative;
+    }
+    .sk-topics li::before { content: '·'; position: absolute; right: 0; color: var(--border-strong); }
+  </style>
+  <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
+  <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../" class="site-title">מדריך <em>פסיכופיזיולוגיה</em></a>
+    <ul class="nav-links">
+      <li><a href="../intro/">מבוא</a></li>
+      <li><a href="../measures/">מדדים</a></li>
+      <li><a href="../eda/" class="here">EDA</a></li>
+      <li><a href="../ecg-rsa/">ECG &amp; RSA</a></li>
+      <li><a href="../case-study/">ניתוח מקרה</a></li>
+      <li><a href="../resources/">משאבים</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="rp"></div>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-label">בסקשן זה</div>
+      <ul class="toc">
+        <li><a href="#physiology"><span class="toc-n">3.1</span>הבסיס הפיזיולוגי</a></li>
+        <li><a href="#components"><span class="toc-n">3.2</span>רכיבי האות — SCL, SCR</a></li>
+        <li><a href="#equipment"><span class="toc-n">3.3</span>ציוד ופרוטוקול הצבה</a></li>
+        <li><a href="#processing"><span class="toc-n">3.4</span>עיבוד ובקרת איכות</a></li>
+        <li><a href="#metrics"><span class="toc-n">3.5</span>מדדי ניתוח</a></li>
+        <li><a href="#r-code"><span class="toc-n">3.6</span>ניתוח ב-R</a></li>
+        <li><a href="#questions"><span class="toc-n">3.7</span>שאלות מחקר</a></li>
+      </ul>
+      <div class="sec-prog">
+        <div class="prog-lbl">Section 3 מתוך 6</div>
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div>
+          <div class="dot on"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="sec-head">
+      <span class="sec-tag">Section 3 · EDA</span>
+      <h1>פעילות אלקטרודרמלית<br><span style="font-weight:300;font-size:0.75em;">מדריך מלא לאיסוף, עיבוד וניתוח</span></h1>
+      <p class="sec-intro">EDA — מדידת פעילות בלוטות הזיעה כמדד לעוררות סימפתטית. מהבסיס הפיזיולוגי, דרך פרוטוקול הצבה, ועד לקוד R מוכן לשימוש.</p>
+    </header>
+
+    <div class="sk-banner">
+      <span class="sk-banner-icon">⚡</span>
+      <p><strong>סקשן זה בפיתוח.</strong> המבנה המלא של הדפים מוכן — תוכן יוחלף לאחר שלב המחקר.</p>
+    </div>
+
+    <div class="sk-grid">
+
+      <div class="sk-card" id="physiology">
+        <div class="sk-card-head">
+          <span class="sk-num">3.1</span>
+          <span class="sk-title">הבסיס הפיזיולוגי של EDA</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">כיצד בלוטות הזיעה האקריניות, תחת שליטה סימפתטית בלבד, יוצרות שינויים בהתנגדות החשמלית של העור — ומה זה אומר פסיכולוגית.</p>
+        <ul class="sk-topics">
+          <li>בלוטות זיעה אקריניות: היכן, כמה, ולמה כפות הידיים רגישות יותר</li>
+          <li>שרשרת SNS: טריגר מהמוח → אצטילכולין → הפרשת זיעה → שינוי מוליכות</li>
+          <li>מה EDA מודד בדיוק: SCL (skin conductance level) vs. SCR (response)</li>
+          <li>ויזואל: אנטומיה של בלוטת זיעה ואות EDA</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="components">
+        <div class="sk-card-head">
+          <span class="sk-num">3.2</span>
+          <span class="sk-title">רכיבי האות — SCL, SCR, NS-SCR</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">פירוק האות לרכיביו: הרמה הבסיסית (SCL), גלי התגובה (SCR), ותגובות ספונטניות לא קשורות לגירוי (NS-SCR). כל רכיב מספר סיפור שונה.</p>
+        <ul class="sk-topics">
+          <li>SCL (Skin Conductance Level): רמת הבסיס — מה משפיע עליה ומה היא מייצגת</li>
+          <li>SCR (Skin Conductance Response): גלי התגובה — latency, amplitude, recovery</li>
+          <li>NS-SCR: תגובות ספונטניות — מה הן אומרות על רמת עוררות</li>
+          <li>גרף: ויזואליזציה של האות ורכיביו</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="equipment">
+        <div class="sk-card-head">
+          <span class="sk-num">3.3</span>
+          <span class="sk-title">ציוד ופרוטוקול הצבה</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">איך בפועל מצמידים אלקטרודות, מה ההבדל בין מכשירים שונים, ואיך נראה פרוטוקול הצבה תקין. כולל PDF פרוטוקול להורדה.</p>
+        <ul class="sk-topics">
+          <li>ציוד: Empatica E4, Shimmer, BIOPAC — הבדלים מעשיים</li>
+          <li>אלקטרודות: גודל, סוג ג'ל, אתר הצבה (דיסטל פאלנקס מול תנאר)</li>
+          <li>פרוטוקול: הכנת עור, הרגעה, baseline, הנחיות לנבדק</li>
+          <li>מה לתעד: metadata חיוני לכל נבדק</li>
+          <li>📥 קישור לפרוטוקול PDF להורדה (יתווסף)</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="processing">
+        <div class="sk-card-head">
+          <span class="sk-num">3.4</span>
+          <span class="sk-title">עיבוד ובקרת איכות</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">מה עושים עם האות הגולמי לפני שמנתחים: פילטרים, זיהוי ארטיפקטים, החלטות על אקסקלוזיה, ומה מקובל בשדה.</p>
+        <ul class="sk-topics">
+          <li>Downsampling ו-lowpass filter: למה ואיך</li>
+          <li>זיהוי ארטיפקטים: תנועה, שגיאות אלקטרודה, spike artifacts</li>
+          <li>קריטריוני אקסקלוזיה: מה מקובל לפסול ומה לשמור</li>
+          <li>Baseline correction: שיטות שונות ומתי להשתמש בכל אחת</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="metrics">
+        <div class="sk-card-head">
+          <span class="sk-num">3.5</span>
+          <span class="sk-title">מדדי ניתוח ומשמעותם</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">אילו מספרים בסוף "מוציאים" מ-EDA, מה כל אחד מייצג, ולאיזו שאלת מחקר כל מדד מתאים.</p>
+        <ul class="sk-topics">
+          <li>Mean SCL: רמת עוררות ממוצעת בבלוק</li>
+          <li>SCR count: כמה תגובות בפרק זמן — תדירות עוררות</li>
+          <li>SCR amplitude: עוצמת התגובה לגירוי ספציפי</li>
+          <li>Peak latency ו-recovery time: מה ניתן להסיק מהתזמון</li>
+          <li>ANCOVA vs. change scores: שיקולים סטטיסטיים</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="r-code">
+        <div class="sk-card-head">
+          <span class="sk-num">3.6</span>
+          <span class="sk-title">ניתוח ב-R — קוד מוסבר שלב אחר שלב</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">קוד R מלא לניתוח EDA: מטעינת קובץ גולמי ועד לטבלת תוצאות. כל שורה מוסברת. מבוסס על tidyverse + חבילות ייעודיות.</p>
+        <ul class="sk-topics">
+          <li>ייבוא נתונים מ-Empatica E4 / BIOPAC</li>
+          <li>עיבוד: filter, epoch segmentation, artifact removal</li>
+          <li>חישוב מדדים: SCL, SCR count, amplitude</li>
+          <li>ויזואליזציה: ggplot2 לאות ולתוצאות</li>
+          <li>📥 קובץ .R להורדה (יתווסף)</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="questions">
+        <div class="sk-card-head">
+          <span class="sk-num">3.7</span>
+          <span class="sk-title">שאלות מחקר ודוגמאות מהספרות</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">איך שאלות מחקר קונקרטיות מתורגמות לניתוח EDA — דוגמאות מהספרות הפסיכופיזיולוגית ומחקר ספציפי לסכמה תרפיה ורגש.</p>
+        <ul class="sk-topics">
+          <li>"האם EDA גבוהה יותר בחשיפה לגירוי סכמה-רלוונטי?" — כיצד לבדוק</li>
+          <li>"האם EDA מנבאת דיווח סובייקטיבי על עוררות?" — מחקרי validation</li>
+          <li>דוגמאות ממחקרים על רגש ויחסים בין-אישיים</li>
+          <li>תרגום לשאלת המחקר שלכם</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <nav class="page-nav">
+      <a href="../measures/" class="page-nav-btn prev">
+        <span class="pn-arrow">→</span>
+        <div><div class="pn-dir">Section הקודם</div><div class="pn-title">מפת המדדים</div></div>
+      </a>
+      <a href="../ecg-rsa/" class="page-nav-btn">
+        <div><div class="pn-dir">Section הבא</div><div class="pn-title">ECG &amp; RSA</div></div>
+        <span class="pn-arrow">←</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script>
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rp').style.transform = `scaleX(${window.scrollY / h})`;
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script src="../js/enhance.js"></script>
+<script src="../js/gate.js"></script>
+</body>
+</html>

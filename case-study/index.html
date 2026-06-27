@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ניתוח מקרה — נתונים אמיתיים | Section 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Lato:wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shared.css">
+  <style>
+    .sk-banner {
+      display: flex; align-items: center; gap: 12px;
+      background: #FFF6EE; border: 1px solid #DFC49A;
+      border-right: 4px solid var(--era-1);
+      padding: 14px 20px; border-radius: 0 3px 3px 0;
+      margin-bottom: 16px;
+    }
+    .sk-banner p { font-family: var(--font-ui); font-size: 0.85rem; color: #6A4820; margin: 0; line-height: 1.5; }
+    .sk-banner strong { color: #4A2C08; }
+
+    .data-notice {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: 3px; padding: 20px 24px; margin-bottom: 40px;
+      font-family: var(--font-ui); font-size: 0.84rem; color: var(--text-mid);
+      line-height: 1.65;
+    }
+    .data-notice strong { color: var(--text); display: block; margin-bottom: 6px; font-size: 0.88rem; }
+
+    .sk-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+    .sk-card { border: 1.5px dashed var(--border-strong); border-radius: 4px; padding: 22px 24px; background: var(--bg-alt); }
+    .sk-card-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .sk-num { font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; color: var(--text-light); background: var(--border); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-title { font-size: 1.05rem; font-weight: 700; color: var(--text); flex: 1; }
+    .sk-badge { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); border: 1px solid var(--border-strong); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-desc { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 12px; line-height: 1.65; }
+    .sk-topics { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .sk-topics li { font-family: var(--font-ui); font-size: 0.82rem; color: var(--text-light); padding-right: 14px; position: relative; }
+    .sk-topics li::before { content: '·'; position: absolute; right: 0; color: var(--border-strong); }
+  </style>
+  <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
+  <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../" class="site-title">מדריך <em>פסיכופיזיולוגיה</em></a>
+    <ul class="nav-links">
+      <li><a href="../intro/">מבוא</a></li>
+      <li><a href="../measures/">מדדים</a></li>
+      <li><a href="../eda/">EDA</a></li>
+      <li><a href="../ecg-rsa/">ECG &amp; RSA</a></li>
+      <li><a href="../case-study/" class="here">ניתוח מקרה</a></li>
+      <li><a href="../resources/">משאבים</a></li>
+    </ul>
+  </div>
+</nav>
+<div id="rp"></div>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-label">בסקשן זה</div>
+      <ul class="toc">
+        <li><a href="#experiment"><span class="toc-n">5.1</span>הניסוי והנבדק</a></li>
+        <li><a href="#eda-raw"><span class="toc-n">5.2</span>EDA — מגולמי לניתוח</a></li>
+        <li><a href="#rsa-raw"><span class="toc-n">5.3</span>RSA — מ-IBI לספקטרום</a></li>
+        <li><a href="#combined"><span class="toc-n">5.4</span>שילוב המדדים</a></li>
+        <li><a href="#conclusion"><span class="toc-n">5.5</span>חזרה לשאלת המחקר</a></li>
+      </ul>
+      <div class="sec-prog">
+        <div class="prog-lbl">Section 5 מתוך 6</div>
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot on"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="sec-head">
+      <span class="sec-tag">Section 5 · ניתוח מקרה</span>
+      <h1>נתונים אמיתיים<br><span style="font-weight:300;font-size:0.75em;">EDA ו-RSA — שלב אחר שלב</span></h1>
+      <p class="sec-intro">כאן התיאוריה פוגשת את המציאות. נבדק אמיתי, ניסוי אמיתי — ניתוח מלא של EDA ו-RSA מהאות הגולמי ועד לפרשנות.</p>
+    </header>
+
+    <div class="sk-banner">
+      <span>🔬</span>
+      <p><strong>ממתין לנתונים.</strong> מבנה הסקשן מוכן — יאוכלס בנתונים אמיתיים מהמעבדה כשיהיו זמינים.</p>
+    </div>
+
+    <div class="data-notice">
+      <strong>מה נדרש למילוי הסקשן הזה</strong>
+      קובץ EDA גולמי + קובץ ECG גולמי מניסוי מהמעבדה, לצד תיאור הפרדיגמה (מה הנבדק עשה, מה היו הגירויים, כמה בלוקים). הסקשן יבנה סביב הנתונים האמיתיים — לא נתונים מדומים.
+    </div>
+
+    <div class="sk-grid">
+
+      <div class="sk-card" id="experiment">
+        <div class="sk-card-head">
+          <span class="sk-num">5.1</span>
+          <span class="sk-title">הניסוי והנבדק — הקשר ופרדיגמה</span>
+          <span class="sk-badge">ממתין לנתונים</span>
+        </div>
+        <p class="sk-desc">תיאור קצר של הניסוי: מה רצינו לבדוק, מה הנבדק עשה, מה היו הגירויים. ההקשר שמאפשר לפרש את הנתונים.</p>
+        <ul class="sk-topics">
+          <li>שאלת המחקר של הניסוי הספציפי</li>
+          <li>תיאור הפרדיגמה: בלוקים, גירויים, תזמון</li>
+          <li>פרטי הנבדק הרלוונטיים (ללא מידע מזהה)</li>
+          <li>מה מדדנו ובאיזה ציוד</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="eda-raw">
+        <div class="sk-card-head">
+          <span class="sk-num">5.2</span>
+          <span class="sk-title">EDA — מהאות הגולמי לניתוח</span>
+          <span class="sk-badge">ממתין לנתונים</span>
+        </div>
+        <p class="sk-desc">הנבדק האמיתי: גרף EDA גולמי, תהליך הניקוי, זיהוי הגירויים על האות, וחישוב המדדים — עם הסברים על כל החלטה.</p>
+        <ul class="sk-topics">
+          <li>גרף: האות הגולמי עם markers לגירויים</li>
+          <li>תהליך הניקוי: מה הוצא ולמה</li>
+          <li>גרף: האות לאחר עיבוד</li>
+          <li>חישוב SCL, SCR count, SCR amplitude לכל בלוק</li>
+          <li>הקוד המלא ב-R עם הסבר</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="rsa-raw">
+        <div class="sk-card-head">
+          <span class="sk-num">5.3</span>
+          <span class="sk-title">RSA — מה-IBI לספקטרום</span>
+          <span class="sk-badge">ממתין לנתונים</span>
+        </div>
+        <p class="sk-desc">אותו נבדק: גרף ECG גולמי, R-peak detection, בניית IBI series, ניתוח ספקטרום, וחישוב RSA — עם הסברים על כל שלב.</p>
+        <ul class="sk-topics">
+          <li>גרף: ECG גולמי עם R-peaks מסומנים</li>
+          <li>IBI series: גרף הסדרה הזמנית</li>
+          <li>Power spectrum: גרף LF/HF</li>
+          <li>ערכי RMSSD ו-HF-HRV לכל בלוק</li>
+          <li>הקוד המלא ב-R עם הסבר</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="combined">
+        <div class="sk-card-head">
+          <span class="sk-num">5.4</span>
+          <span class="sk-title">שילוב המדדים — מה כל אחד מוסיף?</span>
+          <span class="sk-badge">ממתין לנתונים</span>
+        </div>
+        <p class="sk-desc">כשיש גם EDA וגם RSA — איך קוראים אותם יחד? מה קורה כשהם מספרים סיפורים שונים? דיון בפרשנות המשולבת.</p>
+        <ul class="sk-topics">
+          <li>גרף: EDA ו-RSA לאורך הניסוי — ציר זמן משולב</li>
+          <li>פרשנות: בלוקים שבהם שניהם עולים — מה זה אומר?</li>
+          <li>פרשנות: בלוקים שבהם הם מנוגדים — מה זה אומר?</li>
+          <li>מגבלות הפרשנות המשולבת</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="conclusion">
+        <div class="sk-card-head">
+          <span class="sk-num">5.5</span>
+          <span class="sk-title">חזרה לשאלת המחקר</span>
+          <span class="sk-badge">ממתין לנתונים</span>
+        </div>
+        <p class="sk-desc">הנתונים בחזרה לשאלה: מה הנתונים של הנבדק הזה אומרים על השאלה המחקרית? מה ניתן להסיק ומה לא? גשר מהמקרה הבודד לרמת הקבוצה.</p>
+        <ul class="sk-topics">
+          <li>ענינו על שאלת המחקר? כן / לא / חלקית — ולמה</li>
+          <li>מה היה שונה עם נבדקים נוספים?</li>
+          <li>מה היינו עושים אחרת בפרוטוקול?</li>
+          <li>גשר: מנבדק אחד למחקר מלא</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <nav class="page-nav">
+      <a href="../ecg-rsa/" class="page-nav-btn prev">
+        <span class="pn-arrow">→</span>
+        <div><div class="pn-dir">Section הקודם</div><div class="pn-title">ECG &amp; RSA</div></div>
+      </a>
+      <a href="../resources/" class="page-nav-btn">
+        <div><div class="pn-dir">Section הבא</div><div class="pn-title">משאבים וכלים</div></div>
+        <span class="pn-arrow">←</span>
+      </a>
+    </nav>
+  </main>
+</div>
+
+<script>
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rp').style.transform = `scaleX(${window.scrollY / h})`;
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script src="../js/enhance.js"></script>
+<script src="../js/gate.js"></script>
+</body>
+</html>

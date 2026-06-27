@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>משאבים וכלים | Section 6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Lato:wght@0,300;0,400;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shared.css">
+  <style>
+    .sk-banner {
+      display: flex; align-items: center; gap: 12px;
+      background: #EEF3F8; border: 1px solid #A8C0D6;
+      border-right: 4px solid var(--era-2);
+      padding: 14px 20px; border-radius: 0 3px 3px 0;
+      margin-bottom: 40px;
+    }
+    .sk-banner p { font-family: var(--font-ui); font-size: 0.85rem; color: #2A4A62; margin: 0; line-height: 1.5; }
+    .sk-banner strong { color: #1A2E42; }
+    .sk-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+    .sk-card { border: 1.5px dashed var(--border-strong); border-radius: 4px; padding: 22px 24px; background: var(--bg-alt); }
+    .sk-card-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .sk-num { font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; color: var(--text-light); background: var(--border); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-title { font-size: 1.05rem; font-weight: 700; color: var(--text); flex: 1; }
+    .sk-badge { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); border: 1px solid var(--border-strong); padding: 2px 8px; border-radius: 2px; flex-shrink: 0; }
+    .sk-desc { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 12px; line-height: 1.65; }
+    .sk-topics { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .sk-topics li { font-family: var(--font-ui); font-size: 0.82rem; color: var(--text-light); padding-right: 14px; position: relative; }
+    .sk-topics li::before { content: '·'; position: absolute; right: 0; color: var(--border-strong); }
+
+    .download-placeholder {
+      display: flex; align-items: center; gap: 14px;
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 14px 18px; margin-top: 12px;
+      background: var(--bg); opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .dl-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .dl-name { font-family: var(--font-ui); font-size: 0.85rem; font-weight: 700; color: var(--text-mid); }
+    .dl-status { font-family: var(--font-ui); font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+  </style>
+  <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
+  <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../" class="site-title">מדריך <em>פסיכופיזיולוגיה</em></a>
+    <ul class="nav-links">
+      <li><a href="../intro/">מבוא</a></li>
+      <li><a href="../measures/">מדדים</a></li>
+      <li><a href="../eda/">EDA</a></li>
+      <li><a href="../ecg-rsa/">ECG &amp; RSA</a></li>
+      <li><a href="../case-study/">ניתוח מקרה</a></li>
+      <li><a href="../resources/" class="here">משאבים</a></li>
+    </ul>
+  </div>
+</nav>
+<div id="rp"></div>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-label">בסקשן זה</div>
+      <ul class="toc">
+        <li><a href="#protocols"><span class="toc-n">6.1</span>פרוטוקולים להורדה</a></li>
+        <li><a href="#r-scripts"><span class="toc-n">6.2</span>R Scripts</a></li>
+        <li><a href="#bibliography"><span class="toc-n">6.3</span>ביבליוגרפיה מוסברת</a></li>
+        <li><a href="#links"><span class="toc-n">6.4</span>קישורים וכלים</a></li>
+      </ul>
+      <div class="sec-prog">
+        <div class="prog-lbl">Section 6 מתוך 6</div>
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div>
+          <div class="dot on"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="sec-head">
+      <span class="sec-tag">Section 6 · משאבים</span>
+      <h1>פרוטוקולים, קוד ומקורות</h1>
+      <p class="sec-intro">כל מה שצריך לצאת לשטח: פרוטוקולים להדפסה, R scripts מוכנים לשימוש, ביבליוגרפיה מוסברת, וקישורים שחוסכים שעות של חיפוש.</p>
+    </header>
+
+    <div class="sk-banner">
+      <span>📚</span>
+      <p><strong>סקשן זה בפיתוח.</strong> הקבצים להורדה יתווספו בהמשך, במקביל לבניית הסקשנים הטכניים.</p>
+    </div>
+
+    <div class="sk-grid">
+
+      <div class="sk-card" id="protocols">
+        <div class="sk-card-head">
+          <span class="sk-num">6.1</span>
+          <span class="sk-title">פרוטוקולי מעבדה להורדה</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">מסמכי PDF מוכנים להדפסה — לשימוש ביום הניסוי בפועל. מכסים את כל שלבי ההכנה, ההצבה, ואיסוף הנתונים.</p>
+
+        <div class="download-placeholder">
+          <span class="dl-icon">📄</span>
+          <div><div class="dl-name">פרוטוקול הצבת EDA — PDF</div><div class="dl-status">יתווסף בשלב בניית Section 3</div></div>
+        </div>
+        <div class="download-placeholder">
+          <span class="dl-icon">📄</span>
+          <div><div class="dl-name">פרוטוקול הצבת ECG — PDF</div><div class="dl-status">יתווסף בשלב בניית Section 4</div></div>
+        </div>
+        <div class="download-placeholder">
+          <span class="dl-icon">📄</span>
+          <div><div class="dl-name">צ'קליסט כללי לניסוי פיזיולוגי — PDF</div><div class="dl-status">יתווסף בהמשך</div></div>
+        </div>
+      </div>
+
+      <div class="sk-card" id="r-scripts">
+        <div class="sk-card-head">
+          <span class="sk-num">6.2</span>
+          <span class="sk-title">R Scripts מוכנים לשימוש</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">הקוד מהסקשנים הטכניים — כקבצי .R עצמאיים מוכנים להרצה. כל script מתועד ומכיל הנחיות שימוש בתחילתו.</p>
+
+        <div class="download-placeholder">
+          <span class="dl-icon">💻</span>
+          <div><div class="dl-name">eda_analysis.R — ניתוח EDA מלא</div><div class="dl-status">יתווסף בשלב בניית Section 3</div></div>
+        </div>
+        <div class="download-placeholder">
+          <span class="dl-icon">💻</span>
+          <div><div class="dl-name">rsa_analysis.R — ניתוח RSA מלא</div><div class="dl-status">יתווסף בשלב בניית Section 4</div></div>
+        </div>
+        <div class="download-placeholder">
+          <span class="dl-icon">💻</span>
+          <div><div class="dl-name">case_study.R — קוד ניתוח המקרה</div><div class="dl-status">יתווסף בשלב בניית Section 5</div></div>
+        </div>
+      </div>
+
+      <div class="sk-card" id="bibliography">
+        <div class="sk-card-head">
+          <span class="sk-num">6.3</span>
+          <span class="sk-title">ביבליוגרפיה מוסברת</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">לא רשימת מקורות יבשה — כל מקור עם שורה שמסבירה <em>מה הוא נותן</em> ומה הוא הכרחי לקרוא לפני מה. מסודר לפי נושא.</p>
+        <ul class="sk-topics">
+          <li>כניסה לתחום: ספרי יסוד ומאמרי סקירה</li>
+          <li>EDA: הספרות הקאנונית</li>
+          <li>HRV/RSA: מהפורמליסטים לקליניקה</li>
+          <li>Polyvagal Theory: המקורות + הביקורות</li>
+          <li>סכמה תרפיה ופיזיולוגיה: מה קיים</li>
+          <li>R packages: תיעוד רשמי + tutorials מומלצים</li>
+        </ul>
+      </div>
+
+      <div class="sk-card" id="links">
+        <div class="sk-card-head">
+          <span class="sk-num">6.4</span>
+          <span class="sk-title">קישורים וכלים מומלצים</span>
+          <span class="sk-badge">מתוכנן</span>
+        </div>
+        <p class="sk-desc">אוסף של כלים, פורומים ומשאבים שמועילים בחיי המעבדה היומיומיים — לא כל מה שקיים, רק מה שבאמת שימושי.</p>
+        <ul class="sk-topics">
+          <li>Society for Psychophysiological Research (SPR) — האתר והוועדות</li>
+          <li>PhysioNet — מאגר נתונים פיזיולוגיים פתוחים</li>
+          <li>Neurokit2 (Python) ו-RHRV (R) — תיעוד ודוגמאות</li>
+          <li>Empatica E4 & Shimmer — מנואלים ופורומי תמיכה</li>
+          <li>OpenNeuro ו-OSF — עקרונות מדע פתוח לנתונים פיזיולוגיים</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <nav class="page-nav">
+      <a href="../case-study/" class="page-nav-btn prev">
+        <span class="pn-arrow">→</span>
+        <div><div class="pn-dir">Section הקודם</div><div class="pn-title">ניתוח מקרה</div></div>
+      </a>
+      <a href="../intro/" class="page-nav-btn">
+        <div><div class="pn-dir">חזרה להתחלה</div><div class="pn-title">רקע ועולם המחקר</div></div>
+        <span class="pn-arrow">←</span>
+      </a>
+    </nav>
+  </main>
+</div>
+
+<script>
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rp').style.transform = `scaleX(${window.scrollY / h})`;
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+<script src="../js/enhance.js"></script>
+<script src="../js/gate.js"></script>
+</body>
+</html>
