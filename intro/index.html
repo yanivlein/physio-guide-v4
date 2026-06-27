@@ -193,19 +193,33 @@
     .lb-close { position:fixed; top:18px; left:20px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font-size:1.7rem; line-height:1; cursor:pointer; display:grid; place-items:center; transition:background .18s; }
     .lb-close:hover { background:rgba(255,255,255,.24); }
 
-    .milestones { margin: 6px 0 0; }
-    .milestones-scroll { overflow-x:auto; border:1px solid var(--border); border-radius:6px; -webkit-overflow-scrolling:touch; }
-    .mtable { border-collapse:collapse; width:100%; min-width:1060px; font-family:var(--font-ui); font-size:0.82rem; text-align:left; }
-    .mtable thead th { position:sticky; top:0; background:var(--accent); color:#fff; font-weight:700; font-size:0.73rem; letter-spacing:.01em; text-align:left; padding:11px 12px; line-height:1.4; }
+    .milestones { margin: 6px 0 0; display:grid; grid-template-columns:minmax(0,1fr); }
+    .m-tools { display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
+    .m-tool { display:inline-flex; align-items:center; gap:6px; font-family:var(--font-ui); font-size:0.74rem; font-weight:700; color:var(--accent); background:var(--bg); border:1px solid var(--border-strong); border-radius:6px; padding:6px 11px; cursor:pointer; text-decoration:none; transition:background .15s,border-color .15s,color .15s; }
+    .m-tool:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .m-tool .ico { font-size:0.98rem; line-height:1; }
+    /* one scroll box: vertical + horizontal scroll inside, header + year column stay visible */
+    .milestones-scroll { direction:ltr; min-width:0; max-height:64vh; overflow:auto; border:1px solid var(--border); border-radius:6px; background:var(--bg); -webkit-overflow-scrolling:touch; }
+    .mtable { border-collapse:separate; border-spacing:0; width:100%; min-width:1060px; font-family:var(--font-ui); font-size:0.82rem; text-align:left; }
+    .mtable thead th { position:sticky; top:0; z-index:3; background:var(--accent); color:#fff; font-weight:700; font-size:0.73rem; letter-spacing:.01em; text-align:left; padding:11px 12px; line-height:1.4; }
+    .mtable thead th:first-child { left:0; z-index:4; }
     .mtable tbody td { padding:11px 12px; border-top:1px solid var(--border); color:var(--text-mid); line-height:1.6; vertical-align:top; }
-    .mtable tbody tr:nth-child(even) { background:var(--bg-alt); }
-    .mtable tbody tr:hover { background:var(--accent-subtle); }
-    .mtable .yr { font-weight:700; color:var(--accent); white-space:nowrap; }
+    .mtable tbody tr:nth-child(even) td { background:var(--bg-alt); }
+    .mtable tbody tr:hover td { background:var(--accent-subtle); }
+    .mtable .yr { position:sticky; left:0; z-index:2; font-weight:700; color:var(--accent); white-space:nowrap; background:var(--bg); }
+    .mtable tbody tr:nth-child(even) .yr { background:var(--bg-alt); }
+    .mtable tbody tr:hover .yr { background:var(--accent-subtle); }
     .mtable .who { font-weight:700; color:var(--text); }
     .mtable .src { text-align:center; white-space:nowrap; color:var(--text-light); font-weight:700; }
     .m-legend { font-family:var(--font-ui); font-size:0.76rem; color:var(--text-light); margin-top:11px; line-height:1.6; }
     .m-legend b { color:var(--text-mid); }
-    @media (max-width:880px){ .fig .shot-zoom{ bottom:8px; left:8px; } }
+    .milestones:fullscreen { background:var(--bg); padding:22px 26px; overflow:auto; }
+    .milestones:fullscreen .milestones-scroll { max-height:calc(100vh - 130px); }
+    /* inference video */
+    .vid { margin: 0 0 22px; }
+    .vid video { display:block; width:100%; height:auto; max-height:62vh; border:1px solid var(--border); border-radius:6px; background:#000; box-shadow:0 1px 3px rgba(28,27,24,.05); }
+    .vid figcaption { font-family:var(--font-ui); font-size:0.8rem; color:var(--text-light); line-height:1.6; margin-top:11px; padding-right:12px; border-right:3px solid var(--border-strong); }
+    @media (max-width:880px){ .fig .shot-zoom{ bottom:8px; left:8px; } .milestones-scroll{ max-height:72vh; } }
   </style>
   <script>try{if(sessionStorage.getItem('arlabAuth')!=='1')document.documentElement.classList.add('arlab-gate-locked')}catch(e){}</script>
   <style>html.arlab-gate-locked{overflow:hidden;background:#FDFCF9}html.arlab-gate-locked body{visibility:hidden}html.arlab-gate-locked #arlab-gate{visibility:visible}</style>
@@ -540,11 +554,22 @@
       </ul>
     </section>
 
-    <!-- MILESTONES TABLE (from xlsx) -->
+    <!-- INFERENCE VIDEO + MILESTONES TABLE (from xlsx) -->
     <section class="cs" id="milestones">
+      <figure class="vid">
+        <video controls preload="metadata" playsinline>
+          <source src="media/inference-logic.mp4" type="video/mp4">
+          הדפדפן שלך אינו תומך בנגן הווידאו — <a href="media/inference-logic.mp4">להורדת הסרטון</a>.
+        </video>
+        <figcaption>סרטון: הלוגיקה של ההיסק הפסיכופיזיולוגי — מהולכת העור (EDA / Skin Conductance) ועד ההיסק על מצב נפשי. ניתן לעצור ולהמשיך, ולהציג במסך מלא.</figcaption>
+      </figure>
       <h2>ציר הזמן ואבני הדרך של הפסיכופיזיולוגיה הקלינית</h2>
       <p>טבלה מסכמת — מ-1847 ועד היום: התגליות ואבני הדרך התיאורטיות, המדדים הפיזיולוגיים, המשמעות הפסיכולוגית, והיישום הקליני (המשוער) בהקשר של סכמה תרפיה. גללו לצדדים לטבלה המלאה.</p>
-      <div class="milestones">
+      <div class="milestones" id="milestones-block">
+        <div class="m-tools">
+          <button type="button" class="m-tool" id="m-fs" aria-label="הגדלת הטבלה למסך מלא"><span class="ico" aria-hidden="true">⤢</span>מסך מלא</button>
+          <a class="m-tool" id="m-dl" href="downloads/clinical-psychophysiology-milestones.xlsx" download aria-label="הורדת הטבלה כקובץ Excel"><span class="ico" aria-hidden="true">⭳</span>הורדה (Excel)</a>
+        </div>
         <div class="milestones-scroll">
           <table class="mtable" dir="ltr">
             <thead>
@@ -763,6 +788,21 @@ document.addEventListener('DOMContentLoaded',()=>{buildTL();window.addEventListe
   btn.addEventListener('click', shut);
   lb.addEventListener('click', function(e){ if(e.target===lb) shut(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) shut(); });
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('m-fs'), box=document.getElementById('milestones-block');
+  if(!b||!box) return;
+  if(!box.requestFullscreen){ b.style.display='none'; return; }
+  b.addEventListener('click', function(){
+    if(document.fullscreenElement) document.exitFullscreen();
+    else box.requestFullscreen();
+  });
+  document.addEventListener('fullscreenchange', function(){
+    var on = document.fullscreenElement===box;
+    b.innerHTML = '<span class="ico" aria-hidden="true">'+(on?'⤡':'⤢')+'</span>'+(on?'יציאה ממסך מלא':'מסך מלא');
+  });
 })();
 </script>
 <script src="../js/enhance.js"></script>
